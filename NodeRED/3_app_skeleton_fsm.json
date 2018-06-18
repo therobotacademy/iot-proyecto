@@ -1,0 +1,517 @@
+[{
+	"id": "a3c01e0c.7662d8",
+	"type": "subflow",
+	"name": "[6] INVOICE",
+	"info": "",
+	"in": [{
+		"x": 50,
+		"y": 30,
+		"wires": []
+	}],
+	"out": [{
+		"x": 160,
+		"y": 30,
+		"wires": []
+	}]
+},
+{
+	"id": "71e8ee43.a23248",
+	"type": "subflow",
+	"name": "[5] REFUELING",
+	"info": "",
+	"in": [{
+		"x": 50,
+		"y": 30,
+		"wires": []
+	}],
+	"out": [{
+		"x": 160,
+		"y": 30,
+		"wires": []
+	}]
+},
+{
+	"id": "ca776c72.545b9",
+	"type": "subflow",
+	"name": "(3) INPUT",
+	"info": "",
+	"in": [{
+		"x": 100,
+		"y": 140,
+		"wires": [{
+			"id": "e03a354b.137a1"
+		}]
+	}],
+	"out": [{
+		"x": 820,
+		"y": 140,
+		"wires": [{
+			"id": "2706469c.fb94da",
+			"port": 0
+		}]
+	}]
+},
+{
+	"id": "e03a354b.137a1",
+	"type": "switch",
+	"z": "ca776c72.545b9",
+	"name": "Green to Amber",
+	"property": "payload",
+	"propertyType": "msg",
+	"rules": [{
+		"t": "eq",
+		"v": "Green to Amber",
+		"vt": "str"
+	}],
+	"checkall": "true",
+	"outputs": 1,
+	"x": 300,
+	"y": 140,
+	"wires": [["2706469c.fb94da"]]
+},
+{
+	"id": "2706469c.fb94da",
+	"type": "delay",
+	"z": "ca776c72.545b9",
+	"name": "Show AMBER for 3s",
+	"pauseType": "delay",
+	"timeout": "3",
+	"timeoutUnits": "seconds",
+	"rate": "1",
+	"nbRateUnits": "1",
+	"rateUnits": "second",
+	"randomFirst": "1",
+	"randomLast": "5",
+	"randomUnits": "seconds",
+	"drop": false,
+	"x": 600,
+	"y": 140,
+	"wires": [[]]
+},
+{
+	"id": "c46116a1.f0f05",
+	"type": "subflow",
+	"name": "(2) IDENTIFICATION",
+	"info": "",
+	"in": [{
+		"x": 100,
+		"y": 100,
+		"wires": [{
+			"id": "f733e4cd.1bf82"
+		}]
+	}],
+	"out": [{
+		"x": 880,
+		"y": 100,
+		"wires": [{
+			"id": "7574b5b9.1fd17c",
+			"port": 0
+		}]
+	}]
+},
+{
+	"id": "f733e4cd.1bf82",
+	"type": "switch",
+	"z": "c46116a1.f0f05",
+	"name": "Red+Amber to Green",
+	"property": "payload",
+	"propertyType": "msg",
+	"rules": [{
+		"t": "eq",
+		"v": "Red+Amber to Green",
+		"vt": "str"
+	}],
+	"checkall": "true",
+	"repair": false,
+	"outputs": 1,
+	"x": 300,
+	"y": 100,
+	"wires": [["7574b5b9.1fd17c"]]
+},
+{
+	"id": "7574b5b9.1fd17c",
+	"type": "delay",
+	"z": "c46116a1.f0f05",
+	"name": "Show GREEN for 5s",
+	"pauseType": "delay",
+	"timeout": "5",
+	"timeoutUnits": "seconds",
+	"rate": "1",
+	"nbRateUnits": "1",
+	"rateUnits": "second",
+	"randomFirst": "1",
+	"randomLast": "5",
+	"randomUnits": "seconds",
+	"drop": false,
+	"x": 680,
+	"y": 100,
+	"wires": [[]]
+},
+{
+	"id": "593d9747.532d1",
+	"type": "subflow",
+	"name": "(4) PAYMENT",
+	"info": "",
+	"in": [{
+		"x": 180,
+		"y": 100,
+		"wires": [{
+			"id": "a5b4f6f0.c0873"
+		}]
+	}],
+	"out": [{
+		"x": 800,
+		"y": 100,
+		"wires": [{
+			"id": "da78958a.3f8618",
+			"port": 0
+		}]
+	}]
+},
+{
+	"id": "a5b4f6f0.c0873",
+	"type": "switch",
+	"z": "593d9747.532d1",
+	"name": "Amber to Red",
+	"property": "payload",
+	"propertyType": "msg",
+	"rules": [{
+		"t": "eq",
+		"v": "Amber to Red",
+		"vt": "str"
+	}],
+	"checkall": "true",
+	"outputs": 1,
+	"x": 350,
+	"y": 100,
+	"wires": [["da78958a.3f8618"]]
+},
+{
+	"id": "da78958a.3f8618",
+	"type": "delay",
+	"z": "593d9747.532d1",
+	"name": "Show RED for 5s",
+	"pauseType": "delay",
+	"timeout": "5",
+	"timeoutUnits": "seconds",
+	"rate": "1",
+	"nbRateUnits": "1",
+	"rateUnits": "second",
+	"randomFirst": "1",
+	"randomLast": "5",
+	"randomUnits": "seconds",
+	"drop": false,
+	"x": 600,
+	"y": 100,
+	"wires": [[]]
+},
+{
+	"id": "1ef40715.c88829",
+	"type": "subflow",
+	"name": "(1) DETECTION",
+	"info": "",
+	"in": [{
+		"x": 120,
+		"y": 120,
+		"wires": [{
+			"id": "27d6e230.6d20ce"
+		}]
+	}],
+	"out": [{
+		"x": 960,
+		"y": 120,
+		"wires": [{
+			"id": "d32abda1.162a48",
+			"port": 0
+		}]
+	}]
+},
+{
+	"id": "27d6e230.6d20ce",
+	"type": "switch",
+	"z": "1ef40715.c88829",
+	"name": "Red to Red+Amber",
+	"property": "payload",
+	"propertyType": "msg",
+	"rules": [{
+		"t": "eq",
+		"v": "Red to Red+Amber",
+		"vt": "str"
+	}],
+	"checkall": "true",
+	"repair": false,
+	"outputs": 1,
+	"x": 310,
+	"y": 120,
+	"wires": [["d32abda1.162a48"]]
+},
+{
+	"id": "d32abda1.162a48",
+	"type": "delay",
+	"z": "1ef40715.c88829",
+	"name": "Show Red+Amber for 3s",
+	"pauseType": "delay",
+	"timeout": "3",
+	"timeoutUnits": "seconds",
+	"rate": "1",
+	"nbRateUnits": "1",
+	"rateUnits": "second",
+	"randomFirst": "1",
+	"randomLast": "5",
+	"randomUnits": "seconds",
+	"drop": false,
+	"x": 730,
+	"y": 120,
+	"wires": [[]]
+},
+{
+	"id": "73908941.e7ed4",
+	"type": "FSM",
+	"z": "a0520cb2.1a4b9",
+	"name": "Fuel Station",
+	"topic": "FUEL_STATION",
+	"initstate": "RED",
+	"inittran": "TR_INIT",
+	"entry": true,
+	"exit": true,
+	"tran": true,
+	"rules": [{
+		"n": "Red to Red+Amber",
+		"c": "CHANGE",
+		"s": "RED",
+		"d": "RED_AMBER",
+		"t": "true"
+	},
+	{
+		"n": "Red+Amber to Green",
+		"c": "CHANGE",
+		"s": "RED_AMBER",
+		"d": "GREEN",
+		"t": "true"
+	},
+	{
+		"n": "Green to Amber",
+		"c": "CHANGE",
+		"s": "GREEN",
+		"d": "AMBER",
+		"t": "true"
+	},
+	{
+		"n": "Amber to Red",
+		"c": "CHANGE",
+		"s": "AMBER",
+		"d": "RED",
+		"t": "true"
+	}],
+	"x": 450,
+	"y": 180,
+	"wires": [["16c3101b.1dd0f8",
+	"3f53376f.f6cf78"]]
+},
+{
+	"id": "4d8d8e6f.e0182",
+	"type": "change",
+	"z": "a0520cb2.1a4b9",
+	"name": "CHANGE",
+	"rules": [{
+		"t": "set",
+		"p": "topic",
+		"pt": "msg",
+		"to": "CHANGE",
+		"tot": "str"
+	},
+	{
+		"t": "set",
+		"p": "payload",
+		"pt": "msg",
+		"to": "true",
+		"tot": "bool"
+	}],
+	"action": "",
+	"property": "",
+	"from": "",
+	"to": "",
+	"reg": false,
+	"x": 1100,
+	"y": 460,
+	"wires": [["73908941.e7ed4"]]
+},
+{
+	"id": "5f04bea5.3ed53",
+	"type": "comment",
+	"z": "a0520cb2.1a4b9",
+	"name": "Sample APP pattern for Autonomous Refueling Station",
+	"info": "Note that under UK law, the amber light must\nbe showing for 3 seconds.\n\nSequence is:\n\n- RED\n- RED+AMBER\n- GREEN\n- AMBER\n- RED\n\nIn this finite state machine, we only need\none transition, called `CHANGE` since we only\nneed to rotate through each state in turn.\n\nIn this flow example, we use the transition\noutput to control the sequence and take the\nentry output as the actual light(s) showing.",
+	"x": 310,
+	"y": 40,
+	"wires": []
+},
+{
+	"id": "295625b0.e7a462",
+	"type": "inject",
+	"z": "a0520cb2.1a4b9",
+	"name": "",
+	"topic": "CHANGE",
+	"payload": "true",
+	"payloadType": "bool",
+	"repeat": "",
+	"crontab": "",
+	"once": false,
+	"onceDelay": "",
+	"x": 230,
+	"y": 180,
+	"wires": [["73908941.e7ed4"]]
+},
+{
+	"id": "16c3101b.1dd0f8",
+	"type": "debug",
+	"z": "a0520cb2.1a4b9",
+	"name": "msg",
+	"active": false,
+	"tosidebar": true,
+	"console": false,
+	"tostatus": false,
+	"complete": "true",
+	"x": 630,
+	"y": 80,
+	"wires": []
+},
+{
+	"id": "c5e6df68.60315",
+	"type": "debug",
+	"z": "a0520cb2.1a4b9",
+	"name": "exit",
+	"active": false,
+	"tosidebar": true,
+	"console": false,
+	"tostatus": false,
+	"complete": "payload",
+	"x": 970,
+	"y": 140,
+	"wires": []
+},
+{
+	"id": "c2567e32.12e468",
+	"type": "debug",
+	"z": "a0520cb2.1a4b9",
+	"name": "entry",
+	"active": true,
+	"tosidebar": true,
+	"console": false,
+	"tostatus": false,
+	"complete": "payload",
+	"x": 970,
+	"y": 80,
+	"wires": []
+},
+{
+	"id": "3f53376f.f6cf78",
+	"type": "switch",
+	"z": "a0520cb2.1a4b9",
+	"name": "entry\\exit\\transition",
+	"property": "payload",
+	"propertyType": "msg",
+	"rules": [{
+		"t": "cont",
+		"v": "_entry",
+		"vt": "str"
+	},
+	{
+		"t": "cont",
+		"v": "_exit",
+		"vt": "str"
+	},
+	{
+		"t": "else"
+	}],
+	"checkall": "true",
+	"repair": false,
+	"outputs": 3,
+	"x": 670,
+	"y": 180,
+	"wires": [["c2567e32.12e468"],
+	["c5e6df68.60315"],
+	["988b2981.fd7db8",
+	"2557c5ea.965412",
+	"a3b990a7.2d4c",
+	"135f2ff5.2f6a",
+	"a35fad41.f660f"]]
+},
+{
+	"id": "638485b1.9c64d4",
+	"type": "comment",
+	"z": "a0520cb2.1a4b9",
+	"name": "Otherwise is  '_transition' (does not append anything)",
+	"info": "Does not append anything",
+	"x": 1030,
+	"y": 240,
+	"wires": []
+},
+{
+	"id": "988b2981.fd7db8",
+	"type": "debug",
+	"z": "a0520cb2.1a4b9",
+	"name": "transition",
+	"active": false,
+	"tosidebar": true,
+	"console": false,
+	"tostatus": false,
+	"complete": "payload",
+	"x": 980,
+	"y": 200,
+	"wires": []
+},
+{
+	"id": "2557c5ea.965412",
+	"type": "subflow:1ef40715.c88829",
+	"z": "a0520cb2.1a4b9",
+	"name": "",
+	"x": 450,
+	"y": 340,
+	"wires": [["4d8d8e6f.e0182"]]
+},
+{
+	"id": "a35fad41.f660f",
+	"type": "subflow:593d9747.532d1",
+	"z": "a0520cb2.1a4b9",
+	"name": "",
+	"x": 450,
+	"y": 520,
+	"wires": [["4d8d8e6f.e0182"]]
+},
+{
+	"id": "a3b990a7.2d4c",
+	"type": "subflow:c46116a1.f0f05",
+	"z": "a0520cb2.1a4b9",
+	"name": "",
+	"x": 430,
+	"y": 400,
+	"wires": [["4d8d8e6f.e0182"]]
+},
+{
+	"id": "135f2ff5.2f6a",
+	"type": "subflow:ca776c72.545b9",
+	"z": "a0520cb2.1a4b9",
+	"name": "",
+	"x": 460,
+	"y": 460,
+	"wires": [["4d8d8e6f.e0182"]]
+},
+{
+	"id": "a12123f8.3cefb",
+	"type": "subflow:71e8ee43.a23248",
+	"z": "a0520cb2.1a4b9",
+	"name": "",
+	"x": 450,
+	"y": 580,
+	"wires": [[]]
+},
+{
+	"id": "7fadb31e.85b8d4",
+	"type": "subflow:a3c01e0c.7662d8",
+	"z": "a0520cb2.1a4b9",
+	"name": "",
+	"x": 460,
+	"y": 640,
+	"wires": [[]]
+}]
