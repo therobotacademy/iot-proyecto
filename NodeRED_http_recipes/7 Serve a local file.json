@@ -1,0 +1,82 @@
+[{
+	"id": "6bbf9949.db972",
+	"type": "comment",
+	"z": "7c68d3e7.64909c",
+	"name": "Serve a local file",
+	"info": "",
+	"x": 100,
+	"y": 120,
+	"wires": []
+},
+{
+	"id": "c2f3f60c.f43c78",
+	"type": "comment",
+	"z": "7c68d3e7.64909c",
+	"name": "https://cookbook.nodered.org/http/serve-a-local-file",
+	"info": "",
+	"x": 210,
+	"y": 160,
+	"wires": []
+},
+{
+	"id": "c0805e.88a7afa",
+	"type": "http in",
+	"z": "7c68d3e7.64909c",
+	"name": "",
+	"url": "/hello-file",
+	"method": "get",
+	"upload": false,
+	"swaggerDoc": "",
+	"x": 170,
+	"y": 240,
+	"wires": [["60ffca38.53f304"]]
+},
+{
+	"id": "60ffca38.53f304",
+	"type": "file in",
+	"z": "7c68d3e7.64909c",
+	"name": "",
+	"filename": "/tmp/node-red.png",
+	"format": "",
+	"sendError": true,
+	"x": 350,
+	"y": 240,
+	"wires": [["7013dbb9.a166b4"]]
+},
+{
+	"id": "7013dbb9.a166b4",
+	"type": "change",
+	"z": "7c68d3e7.64909c",
+	"name": "Set Headers",
+	"rules": [{
+		"t": "set",
+		"p": "headers",
+		"pt": "msg",
+		"to": "{}",
+		"tot": "json"
+	},
+	{
+		"t": "set",
+		"p": "headers.content-type",
+		"pt": "msg",
+		"to": "image/png",
+		"tot": "str"
+	}],
+	"action": "",
+	"property": "",
+	"from": "",
+	"to": "",
+	"reg": false,
+	"x": 530,
+	"y": 240,
+	"wires": [["f9617097.1bc7c8"]]
+},
+{
+	"id": "f9617097.1bc7c8",
+	"type": "http response",
+	"z": "7c68d3e7.64909c",
+	"name": "",
+	"x": 670,
+	"y": 240,
+	"wires": []
+}]

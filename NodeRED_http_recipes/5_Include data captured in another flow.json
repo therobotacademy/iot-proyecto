@@ -1,0 +1,118 @@
+[{
+	"id": "6bbf9949.db972",
+	"type": "comment",
+	"z": "7c68d3e7.64909c",
+	"name": "Include data captured in another flow",
+	"info": "",
+	"x": 160,
+	"y": 120,
+	"wires": []
+},
+{
+	"id": "c2f3f60c.f43c78",
+	"type": "comment",
+	"z": "7c68d3e7.64909c",
+	"name": "https://cookbook.nodered.org/http/include-data-from-another-flow",
+	"info": "",
+	"x": 250,
+	"y": 160,
+	"wires": []
+},
+{
+	"id": "6688370b.9aaed",
+	"type": "inject",
+	"z": "7c68d3e7.64909c",
+	"name": "",
+	"topic": "",
+	"payload": "",
+	"payloadType": "date",
+	"repeat": "1",
+	"crontab": "",
+	"once": true,
+	"onceDelay": "",
+	"x": 230,
+	"y": 260,
+	"wires": [["fca4f25.9ccde9"]]
+},
+{
+	"id": "fca4f25.9ccde9",
+	"type": "change",
+	"z": "7c68d3e7.64909c",
+	"name": "Store time",
+	"rules": [{
+		"t": "set",
+		"p": "timestamp",
+		"pt": "flow",
+		"to": "payload",
+		"tot": "msg"
+	}],
+	"action": "",
+	"property": "",
+	"from": "",
+	"to": "",
+	"reg": false,
+	"x": 390,
+	"y": 260,
+	"wires": [[]]
+},
+{
+	"id": "21f5ec16.b1884c",
+	"type": "http in",
+	"z": "7c68d3e7.64909c",
+	"name": "",
+	"url": "/hello-data",
+	"method": "get",
+	"upload": false,
+	"swaggerDoc": "",
+	"x": 240,
+	"y": 300,
+	"wires": [["8338e98e.fcae5"]]
+},
+{
+	"id": "8338e98e.fcae5",
+	"type": "change",
+	"z": "7c68d3e7.64909c",
+	"name": "Copy time",
+	"rules": [{
+		"t": "set",
+		"p": "timestamp",
+		"pt": "msg",
+		"to": "timestamp",
+		"tot": "flow"
+	}],
+	"action": "",
+	"property": "",
+	"from": "",
+	"to": "",
+	"reg": false,
+	"x": 430,
+	"y": 300,
+	"wires": [["68e13772.343738"]]
+},
+{
+	"id": "68e13772.343738",
+	"type": "template",
+	"z": "7c68d3e7.64909c",
+	"name": "page",
+	"field": "payload",
+	"fieldType": "msg",
+	"format": "handlebars",
+	"syntax": "mustache",
+	"template": "<html>\n    <head></head>\n    <body>\n        <h1>Time: {{ timestamp }}</h1>\n    </body>\n</html>",
+	"x": 590,
+	"y": 300,
+	"wires": [["9faa1ffe.d7a748"]]
+},
+{
+	"id": "9faa1ffe.d7a748",
+	"type": "http response",
+	"z": "7c68d3e7.64909c",
+	"name": "",
+	"statusCode": "",
+	"headers": {
+		
+	},
+	"x": 730,
+	"y": 300,
+	"wires": []
+}]

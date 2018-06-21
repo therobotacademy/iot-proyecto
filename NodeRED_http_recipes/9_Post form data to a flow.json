@@ -1,0 +1,15 @@
+[{
+	"id": "61953057.f2da38",
+	"type": "template",
+	"z": "7c68d3e7.64909c",
+	"name": "page",
+	"field": "payload",
+	"fieldType": "msg",
+	"format": "handlebars",
+	"syntax": "mustache",
+	"template": "<html>\n    <head></head>\n    <body>\n        <h1>Hello {{ payload.name }}!</h1>\n    </body>\n</html>",
+	"x": 390,
+	"y": 240,
+	"wires": [["72359385.7a18b4",
+	"63eaf5ae.f99684"]]
+}]

@@ -1,0 +1,84 @@
+[{
+	"id": "6bbf9949.db972",
+	"type": "comment",
+	"z": "7c68d3e7.64909c",
+	"name": "Serve JSON content",
+	"info": "",
+	"x": 110,
+	"y": 120,
+	"wires": []
+},
+{
+	"id": "c2f3f60c.f43c78",
+	"type": "comment",
+	"z": "7c68d3e7.64909c",
+	"name": "https://cookbook.nodered.org/http/serve-json-content",
+	"info": "",
+	"x": 210,
+	"y": 160,
+	"wires": []
+},
+{
+	"id": "85ee1a0e.204ac",
+	"type": "http in",
+	"z": "7c68d3e7.64909c",
+	"name": "",
+	"url": "/hello-json",
+	"method": "get",
+	"upload": false,
+	"swaggerDoc": "",
+	"x": 160,
+	"y": 240,
+	"wires": [["7a833ebb.ee06f"]]
+},
+{
+	"id": "7a833ebb.ee06f",
+	"type": "template",
+	"z": "7c68d3e7.64909c",
+	"name": "page",
+	"field": "payload",
+	"fieldType": "msg",
+	"format": "handlebars",
+	"syntax": "mustache",
+	"template": "{ \"Hello\": \"World\" }",
+	"x": 330,
+	"y": 240,
+	"wires": [["e9fc0dc0.1c034"]]
+},
+{
+	"id": "e9fc0dc0.1c034",
+	"type": "change",
+	"z": "7c68d3e7.64909c",
+	"name": "Set Headers",
+	"rules": [{
+		"t": "set",
+		"p": "headers",
+		"pt": "msg",
+		"to": "{}",
+		"tot": "json"
+	},
+	{
+		"t": "set",
+		"p": "headers.content-type",
+		"pt": "msg",
+		"to": "application/json",
+		"tot": "str"
+	}],
+	"action": "",
+	"property": "",
+	"from": "",
+	"to": "",
+	"reg": false,
+	"x": 490,
+	"y": 240,
+	"wires": [["f63f1af.7ec3868"]]
+},
+{
+	"id": "f63f1af.7ec3868",
+	"type": "http response",
+	"z": "7c68d3e7.64909c",
+	"name": "",
+	"x": 650,
+	"y": 240,
+	"wires": []
+}]

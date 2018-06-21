@@ -1,0 +1,13 @@
+[{
+	"id": "d3b534b.ca8a6c8",
+	"type": "http in",
+	"z": "7c68d3e7.64909c",
+	"name": "",
+	"url": "/hello-param/:name",
+	"method": "get",
+	"upload": false,
+	"swaggerDoc": "",
+	"x": 210,
+	"y": 260,
+	"wires": [["a4da361a.244858"]]
+}]

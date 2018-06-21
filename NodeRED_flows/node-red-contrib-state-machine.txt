@@ -1,0 +1,1 @@
+Transition on topic inject independently of its value (be 'true' or 'false'). FSM impose a condition on value of topic to make the transition

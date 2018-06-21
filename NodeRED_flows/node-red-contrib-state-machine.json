@@ -1,0 +1,79 @@
+[{
+	idf09e0e20.48be4,
+	typestate-machine,
+	zc0b18ca1.faa89,
+	name,
+	triggerPropertytopic,
+	triggerPropertyTypemsg,
+	statePropertypayload,
+	statePropertyTypemsg,
+	outputStateChangeOnlyfalse,
+	throwExceptionfalse,
+	states[start,
+	RED,
+	GREEN],
+	transitions[{
+		nameto_RED,
+		fromstart,
+		toRED
+	},
+	{
+		nameto_GREEN,
+		fromRED,
+		toGREEN
+	},
+	{
+		nameto_RED,
+		fromGREEN,
+		toRED
+	}],
+	x480,
+	y300,
+	wires[[6b48f8af.4dad9]]
+},
+{
+	idc2ffb984.33ba2,
+	typeinject,
+	zc0b18ca1.faa89,
+	name,
+	topicto_RED,
+	payloadtrue,
+	payloadTypebool,
+	repeat,
+	crontab,
+	oncefalse,
+	onceDelay0.1,
+	x270,
+	y280,
+	wires[[f09e0e20.48be4]]
+},
+{
+	id6b48f8af.4dad9,
+	typedebug,
+	zc0b18ca1.faa89,
+	name,
+	activetrue,
+	tosidebartrue,
+	consolefalse,
+	tostatustrue,
+	completetrue,
+	x680,
+	y300,
+	wires[]
+},
+{
+	id171bf2a2.40fdf5,
+	typeinject,
+	zc0b18ca1.faa89,
+	name,
+	topicto_GREEN,
+	payloadtrue,
+	payloadTypebool,
+	repeat,
+	crontab,
+	oncefalse,
+	onceDelay0.1,
+	x260,
+	y360,
+	wires[[f09e0e20.48be4]]
+}]
