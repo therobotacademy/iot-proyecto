@@ -1,0 +1,180 @@
+[
+  {
+    "id": "2e4c5b69.0122d4",
+    "type": "ui_button",
+    "z": "7c68d3e7.64909c",
+    "name": "",
+    "group": "be067537.0e7be8",
+    "order": 0,
+    "width": 0,
+    "height": 0,
+    "passthru": false,
+    "label": "Unlock_door",
+    "color": "",
+    "bgcolor": "",
+    "icon": "admin",
+    "payload": "true",
+    "payloadType": "bool",
+    "topic": "show",
+    "x": 170,
+    "y": 260,
+    "wires": [
+      [
+        "fbfdb07c.40de7"
+      ]
+    ]
+  },
+  {
+    "id": "4f079a77.cba434",
+    "type": "function",
+    "z": "7c68d3e7.64909c",
+    "name": "verify_pin",
+    "func": "var pins = [\"2136\"];\nvar verified = false;\n\nfor(var i=0;i<pins.length;i++){\n    if(msg.passcode == pins[i]){\n        verified = true;\n        break;\n    }\n}\n\nmsg.verified = verified;\n\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 555.6250038146973,
+    "y": 260.0000057220459,
+    "wires": [
+      [
+        "3ef4c4bc.30ecdc"
+      ]
+    ]
+  },
+  {
+    "id": "3ef4c4bc.30ecdc",
+    "type": "switch",
+    "z": "7c68d3e7.64909c",
+    "name": "check",
+    "property": "verified",
+    "propertyType": "msg",
+    "rules": [
+      {
+        "t": "true"
+      },
+      {
+        "t": "false"
+      }
+    ],
+    "checkall": "false",
+    "outputs": 2,
+    "x": 764.1250038146973,
+    "y": 260.0000057220459,
+    "wires": [
+      [
+        "616b0e7b.416ba"
+      ],
+      [
+        "25cd522f.ce2aae"
+      ]
+    ]
+  },
+  {
+    "id": "e0b5781b.ccd1b8",
+    "type": "ui_toast",
+    "z": "7c68d3e7.64909c",
+    "position": "top right",
+    "displayTime": "3",
+    "outputs": 0,
+    "ok": "OK",
+    "cancel": "",
+    "topic": "",
+    "name": "",
+    "x": 1150.1250038146973,
+    "y": 253.0000057220459,
+    "wires": []
+  },
+  {
+    "id": "616b0e7b.416ba",
+    "type": "function",
+    "z": "7c68d3e7.64909c",
+    "name": "pin_ok",
+    "func": "var msg2 = {};\nmsg2.topic = \"Pin successfully verified!\";\nmsg2.payload = \"\";\n    \nreturn [msg, msg2];",
+    "outputs": "2",
+    "noerr": 0,
+    "x": 925.1250038146973,
+    "y": 140.0000057220459,
+    "wires": [
+      [
+        "1a6cdb86.4ee254"
+      ],
+      [
+        "e0b5781b.ccd1b8"
+      ]
+    ]
+  },
+  {
+    "id": "25cd522f.ce2aae",
+    "type": "function",
+    "z": "7c68d3e7.64909c",
+    "name": "pin_error",
+    "func": " msg.topic = \"Wrong PIN\";\n msg.payload = \"\";\n    \nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 940.1250038146973,
+    "y": 358.0000057220459,
+    "wires": [
+      [
+        "e0b5781b.ccd1b8"
+      ]
+    ]
+  },
+  {
+    "id": "fbfdb07c.40de7",
+    "type": "ui_template",
+    "z": "7c68d3e7.64909c",
+    "group": "477a234d.1cc90c",
+    "name": "Pin_Unlock",
+    "order": 0,
+    "width": "0",
+    "height": "0",
+    "format": "<div ng-init=\"init()\" id=\"pin_insert\" class=\"dialog\">\n    \n    <div class=\"dialog_content\">\n        \n        <div class=\"dialog_header\">\n            <span ng-click=\"closeDialog()\" class=\"close\">&times;</span>\n            <h2>Insert PIN</h2>\n        </div>\n        \n        <div class=\"dialog_body\">\n\n           <div layout=\"row\" layout-align=\"center\">\n                <div class=\"number_placeholder\">\n                    {{passcode.substring(0, 1)}}\n                </div>\n                <div class=\"number_placeholder\">\n                    {{passcode.substring(1, 2)}}\n                </div>\n                <div class=\"number_placeholder\">\n                    {{passcode.substring(2, 3)}}\n                </div>\n                <div class=\"number_placeholder\">\n                    {{passcode.substring(3, 4)}}\n                </div>\n            </div>\n            \n            <div layout=\"column\" layout-align=\"center\" style=\"margin-top: 50px\">\n                <div layout=\"row\" layout-align=\"center\">\n                    <div class=\"number_box\">\n                        <md-button class=\"md-raised\" ng-click=\"add(1)\">1</md-button>\n                    </div>\n                    <div class=\"number_box\">\n                        <md-button class=\"md-raised\" ng-click=\"add(2)\">2</md-button>\n                    </div>\n                    <div class=\"number_box\">\n                        <md-button class=\"md-raised\" ng-click=\"add(3)\">3</md-button>\n                    </div>\n                </div>\n                 <div layout=\"row\" layout-align=\"center\">\n                    <div class=\"number_box\">\n                        <md-button class=\"md-raised\" ng-click=\"add(4)\">4</md-button>\n                    </div>\n                    <div class=\"number_box\">\n                        <md-button class=\"md-raised\" ng-click=\"add(5)\">5</md-button>\n                    </div>\n                    <div class=\"number_box\">\n                        <md-button class=\"md-raised\" ng-click=\"add(6)\">6</md-button>\n                    </div>\n                </div>\n                 <div layout=\"row\" layout-align=\"center\">\n                    <div class=\"number_box\">\n                        <md-button class=\"md-raised\" ng-click=\"add(7)\">7</md-button>\n                    </div>\n                    <div class=\"number_box\">\n                        <md-button class=\"md-raised\" ng-click=\"add(8)\">8</md-button>\n                    </div>\n                    <div class=\"number_box\">\n                        <md-button class=\"md-raised\" ng-click=\"add(9)\">9</md-button>\n                    </div>\n                </div>\n                 <div layout=\"row\" layout-align=\"center\">\n                    <div class=\"number_box\">\n                        <md-button class=\"md-raised\" ng-click=\"confirm()\">\n                            <ng-md-icon icon=\"done\" style=\"color:#fff;\"></ng-md-icon>\n                        </md-button>\n                    </div>\n                    <div class=\"number_box\">\n                        <md-button class=\"md-raised\" ng-click=\"add(0)\">0</md-button>\n                    </div>\n                    <div class=\"number_box\">\n                        <md-button class=\"md-raised\" ng-click=\"delete()\">\n                            <ng-md-icon icon=\"arrow_back\" style=\"color:#fff;\"></ng-md-icon>\n                        </md-button>\n                    </div>\n                </div>\n            </div> \n          \n        </div> <!--dialog_body-->\n    </div> <!--dialog_content-->\n</div>  <!--dialog-->\n\n\n<style>\n\n/* The Dialog (background) */\n.dialog {\n    display: none; /* Hidden by default */\n    position: fixed; /* Stay in place */\n    z-index: 9999; /* Sit on top */\n    left: 0;\n    top: 0;\n    width: 100%; /* Full width */\n    height: 100%; /* Full height */\n    overflow: auto; /* Enable scroll if needed */\n    background-color: rgb(0,0,0); /* Fallback color */\n    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */\n    -webkit-transform: translateZ(0px);\n    -webkit-transform: translate3d(0,0,0);\n    -webkit-perspective: 1000;\n}\n\n.dialog_content {\n    position: absolute;\n    background-color: #fff;\n    margin-top: 10%;\n    margin-left: 40%;\n    padding: 0;\n    width: 345px;\n    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);\n    -webkit-animation-name: animatetop;\n    animation-name: animatetop;\n    animation-duration: 0.4s;\n}\n\n/* Media query for smartphones (to Fix?) */\n@media only screen and (min-device-width : 375px) and (max-device-width : 667px) { \n    .dialog_content {\n    margin-top: 5%;\n    margin-left: 5%;\n}\n}\n\n/* Add Animation */\n@-webkit-keyframes animatetop {\n    from {top: -300px; opacity: 0} \n    to {top: 0; opacity: 1}\n}\n\n@keyframes animatetop {\n    from {top: -300px; opacity: 0}\n    to {top: 0; opacity: 1}\n}\n\n/* Dialog Header */\n.dialog_header {\n    padding: 2px 16px;\n    background-color: #03A9F4;\n    color: white;\n}\n\n/* Dialog Body */\n.dialog_body {padding: 16px 16px;}\n\n/* The Close Button */\n.close {\n    color: #fff;\n    float: right;\n    font-size: 28px;\n    font-weight: bold;\n}\n\n.close:hover,\n.close:focus {\n    color: #1565C0;\n    text-decoration: none;\n    cursor: pointer;\n}\n\n/* __ */\n.number_placeholder{\n    width: 50px;\n    height: 34px;\n    margin: 10px;\n    font-size: 20pt;\n    text-align: center;\n    border-bottom: 1px solid black;\n}\n\n/* Number container */\n.number_box{\n    margin: 10px;\n}\n\n/* Buttons style */\n.md-button.md-default-theme.md-raised, .md-button.md-raised{\n    min-height: 50px;\n    min-width: 50px;\n    font-weight: bold;\n    margin: 0px 10px 10px 0px;\n    box-shadow: 4px 4px 6px 0 #dadada;\n    background-color: #29B6F6;\n    color: #fff;\n}\n\n.md-button.md-default-theme.md-raised:not([disabled]):hover, .md-button.md-raised:not([disabled]):hover{\n    background-color: #03A9F4;\n}\n\n.btn1 {\n  color : rgb(49, 46, 46);\n  background-color: rgba(255, 222, 121, 0.96);\n  border-radius: 10px 0 0 10px;\n  font-size: 16px;\n}\n\n.btn1:not([disabled]):hover {\n  background-color: rgba(107, 103, 91, 0.96);\n  color: white;\n}\n\n.btn1[disabled] {\n  color : rgb(187, 187, 187);\n  background-color: rgba(230, 230, 229, 0.96);\n}\n\n</style>\n\n<script>\n\n/**\n * pin_dialog.js\n * Node-Red UI template for Node-Red Dashboard. \n * Custom dialog that asks for a PIN to allow actions\n * Enjoy it :). \n * -- Daniel\n *\n *\n * @license The Unlicense, http://unlicense.org/\n * @version 0.1\n * @author  Daniel Lando, https://github.com/robertsLando\n * @updated 2017-03-08\n * @link    ----\n *\n *\n */\n\nvar dialog;\n\n/* ==== */\n(function(scope) {\n    \n    scope.passcode = \"\";\n    scope.payload = \"\";\n    scope.inited = false;\n    \n    scope.init = function() {\n        scope.passcode = \"\";\n        //Hide the md-panel\n        $('#pin_insert').parent().parent().css(\"display\", \"none\");\n        //This trick make it works on smartphones too :)\n        dialog = $('#pin_insert').detach();\n        dialog.appendTo(document.body);\n    }\n    \n    scope.showDialog = function() {\n        dialog.css(\"display\", \"block\");\n    }\n    \n    scope.closeDialog = function(){\n        dialog.css(\"display\", \"none\");\n    }\n    \n    scope.add = function(value) {\n        if(scope.passcode.length < 4) {\n            scope.passcode = scope.passcode + value;\n            if(scope.passcode.length == 4) {\n                console.log(\"The four digit code was entered\");\n                   \n            }\n        }\n    }\n \n    scope.delete = function() {\n        if(scope.passcode.length > 0) {\n            scope.passcode = scope.passcode.substring(0, scope.passcode.length - 1);\n        }\n    }\n    \n    scope.confirm = function() {\n        if(scope.passcode.length == 4) {\n            scope.send({passcode: scope.passcode, payload : scope.payload});\n            scope.closeDialog();\n            scope.passcode = \"\";\n            scope.payload = \"\";\n        }\n    }\n\n    scope.$watch('msg', function(data) {\n        if(data && data.topic){\n            switch(data.topic){\n               case \"show\":\n                   if(scope.inited){\n                        scope.payload = data.payload;\n                        scope.showDialog();\n                   }\n                   else\n                        scope.inited = true;\n                break;\n                case \"close\": \n                    scope.closeDialog(); \n                break;\n            }\n        }\n    });\n})(scope);\n\n</script>\n",
+    "storeOutMessages": false,
+    "fwdInMessages": false,
+    "templateScope": "local",
+    "x": 361.3750343322754,
+    "y": 259.9642696380615,
+    "wires": [
+      [
+        "4f079a77.cba434"
+      ]
+    ]
+  },
+  {
+    "id": "1a6cdb86.4ee254",
+    "type": "debug",
+    "z": "7c68d3e7.64909c",
+    "name": "do_Something",
+    "active": true,
+    "console": "false",
+    "complete": "payload",
+    "x": 1121.8750038146973,
+    "y": 133.7500057220459,
+    "wires": []
+  },
+  {
+    "id": "be067537.0e7be8",
+    "type": "ui_group",
+    "z": "",
+    "name": "Secure",
+    "tab": "86e3d07.fd5943",
+    "disp": true,
+    "width": "6"
+  },
+  {
+    "id": "477a234d.1cc90c",
+    "type": "ui_group",
+    "z": "",
+    "name": "pin",
+    "tab": "86e3d07.fd5943",
+    "disp": false,
+    "width": "1"
+  },
+  {
+    "id": "86e3d07.fd5943",
+    "type": "ui_tab",
+    "z": "",
+    "name": "Home",
+    "icon": "home",
+    "order": 1
+  }
+]
