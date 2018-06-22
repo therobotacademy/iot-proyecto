@@ -1,0 +1,3 @@
+https://flows.nodered.org/node/node-red-contrib-openalpr-cloud
+https://flows.nodered.org/node/node-red-contrib-jsonpath
+https://flows.nodered.org/node/node-red-node-base64

@@ -1,0 +1,317 @@
+[
+  {
+    "id": "27cc34d6.6037bc",
+    "type": "openalpr-cloud",
+    "z": "6beebf75.ed0b5",
+    "country": [
+      "eu",
+      "fr"
+    ],
+    "secretKey": "your_secret_key",
+    "limit": "20",
+    "recognizeVehicle": true,
+    "skipEmpty": true,
+    "passImage": false,
+    "name": "",
+    "x": 742.7933101654053,
+    "y": 2713,
+    "wires": [
+      [
+        "a2ece2f.f60ee2",
+        "3a8b24b9.a7728c"
+      ]
+    ]
+  },
+  {
+    "id": "ef2d9eca.21a75",
+    "type": "inject",
+    "z": "6beebf75.ed0b5",
+    "name": "Wife car",
+    "topic": "",
+    "payload": "https://static.autoblog.nl/images/wp2015/fiat-500-roze-wimpers.jpg",
+    "payloadType": "str",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "x": 105.95996284484863,
+    "y": 2619.66668844223,
+    "wires": [
+      [
+        "1d2a7510.65967b"
+      ]
+    ]
+  },
+  {
+    "id": "aa342c40.0f3e6",
+    "type": "base64",
+    "z": "6beebf75.ed0b5",
+    "name": "",
+    "x": 586.2382869720459,
+    "y": 2712.806315422058,
+    "wires": [
+      [
+        "27cc34d6.6037bc"
+      ]
+    ]
+  },
+  {
+    "id": "1d3c06bb.a09509",
+    "type": "http request",
+    "z": "6beebf75.ed0b5",
+    "name": "Grab image",
+    "method": "GET",
+    "ret": "bin",
+    "url": "",
+    "tls": "",
+    "delay": 0,
+    "x": 428.24220085144043,
+    "y": 2712.732195854187,
+    "wires": [
+      [
+        "aa342c40.0f3e6"
+      ]
+    ]
+  },
+  {
+    "id": "c3292525.bb8a08",
+    "type": "switch",
+    "z": "6beebf75.ed0b5",
+    "name": "Match plate",
+    "property": "payload",
+    "propertyType": "msg",
+    "rules": [
+      {
+        "t": "cont",
+        "v": "WV10LYP",
+        "vt": "str"
+      },
+      {
+        "t": "cont",
+        "v": "AW852",
+        "vt": "str"
+      },
+      {
+        "t": "else"
+      }
+    ],
+    "checkall": "true",
+    "outputs": 3,
+    "x": 1076.0677471160889,
+    "y": 2713.038344860077,
+    "wires": [
+      [
+        "1d16491b.0c06d7"
+      ],
+      [
+        "78eed963.394bd8"
+      ],
+      [
+        "754c7830.abf038"
+      ]
+    ]
+  },
+  {
+    "id": "1d2a7510.65967b",
+    "type": "change",
+    "z": "6beebf75.ed0b5",
+    "name": "Set url",
+    "rules": [
+      {
+        "t": "set",
+        "p": "url",
+        "pt": "msg",
+        "to": "payload",
+        "tot": "msg"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 281.73438453674316,
+    "y": 2713.0381903648376,
+    "wires": [
+      [
+        "1d3c06bb.a09509"
+      ]
+    ]
+  },
+  {
+    "id": "8e74de1e.aef8",
+    "type": "inject",
+    "z": "6beebf75.ed0b5",
+    "name": "Daddy car",
+    "topic": "",
+    "payload": "https://nbocdn.akamaized.net/Assets/Images_Upload/2015/05/24/patton_drivers_2015_1.jpg",
+    "payloadType": "str",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "x": 105.90105628967285,
+    "y": 2666.371522426605,
+    "wires": [
+      [
+        "1d2a7510.65967b"
+      ]
+    ]
+  },
+  {
+    "id": "156b8eca.8e9321",
+    "type": "debug",
+    "z": "6beebf75.ed0b5",
+    "name": "Result",
+    "active": true,
+    "console": "false",
+    "complete": "payload",
+    "x": 1412.9014263153076,
+    "y": 2713.371953010559,
+    "wires": []
+  },
+  {
+    "id": "1d16491b.0c06d7",
+    "type": "change",
+    "z": "6beebf75.ed0b5",
+    "name": "Wife home",
+    "rules": [
+      {
+        "t": "set",
+        "p": "payload",
+        "pt": "msg",
+        "to": "Wife home.  Hide girlfriend quickly ...",
+        "tot": "str"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 1254.734525680542,
+    "y": 2671.0384702682495,
+    "wires": [
+      [
+        "156b8eca.8e9321"
+      ]
+    ]
+  },
+  {
+    "id": "78eed963.394bd8",
+    "type": "change",
+    "z": "6beebf75.ed0b5",
+    "name": "Daddy home",
+    "rules": [
+      {
+        "t": "set",
+        "p": "payload",
+        "pt": "msg",
+        "to": "Daddy arrived in his favorite vehicle...",
+        "tot": "str"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 1253.9011211395264,
+    "y": 2713.371735572815,
+    "wires": [
+      [
+        "156b8eca.8e9321"
+      ]
+    ]
+  },
+  {
+    "id": "754c7830.abf038",
+    "type": "change",
+    "z": "6beebf75.ed0b5",
+    "name": "Unknown",
+    "rules": [
+      {
+        "t": "set",
+        "p": "payload",
+        "pt": "msg",
+        "to": "Unknown car.  Investigate !!!!!",
+        "tot": "str"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 1244.9011211395264,
+    "y": 2755.371735572815,
+    "wires": [
+      [
+        "156b8eca.8e9321"
+      ]
+    ]
+  },
+  {
+    "id": "875ce10c.f3812",
+    "type": "inject",
+    "z": "6beebf75.ed0b5",
+    "name": "Unknown car",
+    "topic": "",
+    "payload": "https://static.autoblog.nl/images/wp2013/kimgun.jpg",
+    "payloadType": "str",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "x": 114.90102577209473,
+    "y": 2713.371455669403,
+    "wires": [
+      [
+        "1d2a7510.65967b"
+      ]
+    ]
+  },
+  {
+    "id": "a2ece2f.f60ee2",
+    "type": "jsonpath",
+    "z": "6beebf75.ed0b5",
+    "expression": "vehicles[0].plate[0].plate",
+    "split": false,
+    "name": "Extract plate",
+    "x": 911.0677318572998,
+    "y": 2712.705122947693,
+    "wires": [
+      [
+        "c3292525.bb8a08"
+      ]
+    ]
+  },
+  {
+    "id": "b7dea916.9a1e78",
+    "type": "inject",
+    "z": "6beebf75.ed0b5",
+    "name": "No car",
+    "topic": "",
+    "payload": "http://www.dirkvanhullebus.be/nl/images/phocagallery/werken/kasseien/thumbs/phoca_thumb_l_Aanleg%20oprit%20plavuizen%20-%20plattinen%20(3).JPG",
+    "payloadType": "str",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "x": 97,
+    "y": 2758.704647064209,
+    "wires": [
+      [
+        "1d2a7510.65967b"
+      ]
+    ]
+  },
+  {
+    "id": "3a8b24b9.a7728c",
+    "type": "debug",
+    "z": "6beebf75.ed0b5",
+    "name": "Plate test",
+    "active": true,
+    "console": "false",
+    "complete": "true",
+    "x": 902.0678691864014,
+    "y": 2762.3713941574097,
+    "wires": []
+  }
+]
