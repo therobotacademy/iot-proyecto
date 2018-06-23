@@ -1,0 +1,417 @@
+[
+  {
+    "id": "66e62a11.59ea44",
+    "type": "inject",
+    "z": "c66d94c1.d64998",
+    "name": "Voltage Sensor Simulator",
+    "topic": "",
+    "payload": "{ \"d\": { \"voltage\": 240, \"frequency\": 50 } }",
+    "payloadType": "json",
+    "repeat": "0.3",
+    "crontab": "",
+    "once": false,
+    "onceDelay": "",
+    "x": 300,
+    "y": 280,
+    "wires": [
+      [
+        "244e6c2d.eba404"
+      ]
+    ]
+  },
+  {
+    "id": "244e6c2d.eba404",
+    "type": "function",
+    "z": "c66d94c1.d64998",
+    "name": "Voltage data",
+    "func": "// initialise the counter to 0 if it doesn't exist already\nvar count = context.get('count')||0;\nvar to    = context.get('to')||0;\ncount += 1;\n// store the value back\ncontext.set('count',count);\n// make it part of the outgoing msg object\nmsg.payload.d.count = count;\n\n// Set the start time (in the first count)\nif (count == 1) {\n    to = new Date().getTime()/1000;\n    context.set('to',to);\n}\nmsg.to = to;\n\n// Last 10 (3s) counts of every 100 (30s) is where an anomaly [abs(z)>0.5] may appear\n// If voltage values are injected every 0.3s\nif(count % 100 <= 90) {\n    msg.payload.d.voltage = Math.floor(Math.random() * (240 - 220) + 220);\n} else {\n    msg.payload.d.voltage = Math.floor(Math.random() * (260 - 240) + 240);\n}\nmsg.payload.d.frequency = Math.floor(Math.random() * (80 - 60 + 1) + 60);\n//msg.payload = JSON.stringify(msg.payload)\nmsg.eventOrCommandType = \"voltage\"\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 576.550048828125,
+    "y": 281.79998779296875,
+    "wires": [
+      [
+        "315792eb.b708ee",
+        "bab30c9f.32593",
+        "104b8129.1210af",
+        "a095d682.5a5108",
+        "60bd8f3b.65809"
+      ]
+    ]
+  },
+  {
+    "id": "315792eb.b708ee",
+    "type": "function",
+    "z": "c66d94c1.d64998",
+    "name": "add timestamp",
+    "func": "// Report the current timestamp\nmsg.payload.d.ts = new Date().getTime()/1000 - msg.to;\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 806.5,
+    "y": 280.04998779296875,
+    "wires": [
+      [
+        "7a995f46.b67a2"
+      ]
+    ]
+  },
+  {
+    "id": "bab30c9f.32593",
+    "type": "function",
+    "z": "c66d94c1.d64998",
+    "name": "zscore",
+    "func": "var aggwindow = context.get('aggwindow')||[];\n\naggwindow.push(msg.payload.d.voltage); \n\nif (aggwindow.length> 30) {\n    sum = aggwindow.reduce((a,b)=>a+b,0);\n    n = aggwindow.length;\n    mean = sum/n;\n    sd = Math.sqrt(aggwindow.map(x=>Math.pow(mean-x,2)).reduce((a,b)=>a+b,0));\n    aggwindow.shift();\n    msg.zscore = (mean-msg.payload.d.voltage)/(sd+0.0001)\n}\ncontext.set('aggwindow',aggwindow);\n\nvar min = context.get('min')||300;\nvar max = context.get('max')||0;\n\ncontext.set('min',Math.min(min,msg.payload.d.voltage));\ncontext.set('max',Math.max(max,msg.payload.d.voltage));\n\nmsg.payload=msg.payload.d.voltage+\":\"+msg.zscore+\":\"+min+\":\"+max;\n\n\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 350,
+    "y": 500,
+    "wires": [
+      [
+        "2b7ab2b6.6860ae",
+        "8dbf40be.4b8e7"
+      ]
+    ]
+  },
+  {
+    "id": "2b7ab2b6.6860ae",
+    "type": "function",
+    "z": "c66d94c1.d64998",
+    "name": "alert on threshold",
+    "func": "if (Math.abs(msg.zscore)>0.5) {\n    msg.payload=\"ALERT ALERT ALERT!!!!!\";\n    return msg;\n}\n",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 550,
+    "y": 500,
+    "wires": [
+      [
+        "f224a8c2.8d90f8",
+        "2429aa67.f575f6",
+        "e67dc094.b5d05"
+      ]
+    ]
+  },
+  {
+    "id": "a92a2595.afd6b8",
+    "type": "ui_chart",
+    "z": "c66d94c1.d64998",
+    "name": "",
+    "group": "326c9958.cb8656",
+    "order": 0,
+    "width": 0,
+    "height": 0,
+    "label": "voltage",
+    "chartType": "line",
+    "legend": "false",
+    "xformat": "HH:mm:ss",
+    "interpolate": "linear",
+    "nodata": "",
+    "ymin": "200",
+    "ymax": "300",
+    "removeOlder": 1,
+    "removeOlderPoints": "",
+    "removeOlderUnit": "60",
+    "cutout": 0,
+    "colors": [
+      "#1f77b4",
+      "#aec7e8",
+      "#ff7f0e",
+      "#2ca02c",
+      "#98df8a",
+      "#d62728",
+      "#ff9896",
+      "#9467bd",
+      "#c5b0d5"
+    ],
+    "x": 1000,
+    "y": 80,
+    "wires": [
+      [],
+      []
+    ]
+  },
+  {
+    "id": "104b8129.1210af",
+    "type": "function",
+    "z": "c66d94c1.d64998",
+    "name": "Prepare for Visualization",
+    "func": "msg.payload=msg.payload.d.voltage;\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 791,
+    "y": 79.25,
+    "wires": [
+      [
+        "a92a2595.afd6b8"
+      ]
+    ]
+  },
+  {
+    "id": "f9d394c2.a060c8",
+    "type": "ui_chart",
+    "z": "c66d94c1.d64998",
+    "name": "",
+    "group": "326c9958.cb8656",
+    "order": 0,
+    "width": 0,
+    "height": 0,
+    "label": "zscore",
+    "chartType": "line",
+    "legend": "false",
+    "xformat": "HH:mm:ss",
+    "interpolate": "linear",
+    "nodata": "",
+    "dot": false,
+    "ymin": "",
+    "ymax": "",
+    "removeOlder": 1,
+    "removeOlderPoints": "",
+    "removeOlderUnit": "60",
+    "cutout": 0,
+    "useOneColor": false,
+    "colors": [
+      "#1f77b4",
+      "#aec7e8",
+      "#ff7f0e",
+      "#2ca02c",
+      "#98df8a",
+      "#d62728",
+      "#ff9896",
+      "#9467bd",
+      "#c5b0d5"
+    ],
+    "useOldStyle": true,
+    "x": 988.5,
+    "y": 436.5,
+    "wires": [
+      [],
+      []
+    ]
+  },
+  {
+    "id": "8dbf40be.4b8e7",
+    "type": "function",
+    "z": "c66d94c1.d64998",
+    "name": "Prepare for Visualization",
+    "func": "msg.payload=msg.zscore;\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 636,
+    "y": 437,
+    "wires": [
+      [
+        "f9d394c2.a060c8"
+      ]
+    ]
+  },
+  {
+    "id": "f224a8c2.8d90f8",
+    "type": "ui_text_input",
+    "z": "c66d94c1.d64998",
+    "name": "",
+    "label": "Alert Status",
+    "group": "326c9958.cb8656",
+    "order": 0,
+    "width": 0,
+    "height": 0,
+    "passthru": true,
+    "mode": "text",
+    "delay": 300,
+    "topic": "",
+    "x": 1030,
+    "y": 500,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "bb8e7745.bc6588",
+    "type": "delay",
+    "z": "c66d94c1.d64998",
+    "name": "",
+    "pauseType": "delay",
+    "timeout": "5",
+    "timeoutUnits": "seconds",
+    "rate": "1",
+    "nbRateUnits": "1",
+    "rateUnits": "second",
+    "randomFirst": "1",
+    "randomLast": "5",
+    "randomUnits": "seconds",
+    "drop": false,
+    "x": 802.5,
+    "y": 631.75,
+    "wires": [
+      [
+        "f224a8c2.8d90f8"
+      ]
+    ]
+  },
+  {
+    "id": "2429aa67.f575f6",
+    "type": "function",
+    "z": "c66d94c1.d64998",
+    "name": "reset message",
+    "func": "msg.payload = \"\";\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 595.5,
+    "y": 631.75,
+    "wires": [
+      [
+        "bb8e7745.bc6588"
+      ]
+    ]
+  },
+  {
+    "id": "7a995f46.b67a2",
+    "type": "debug",
+    "z": "c66d94c1.d64998",
+    "name": "signal",
+    "active": false,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "true",
+    "x": 990,
+    "y": 280,
+    "wires": []
+  },
+  {
+    "id": "fa3223a4.91ef3",
+    "type": "comment",
+    "z": "c66d94c1.d64998",
+    "name": "do not set < 0.3s to avoid CPU overload",
+    "info": "",
+    "x": 310,
+    "y": 240,
+    "wires": []
+  },
+  {
+    "id": "5f434daf.ea7164",
+    "type": "ui_chart",
+    "z": "c66d94c1.d64998",
+    "name": "",
+    "group": "326c9958.cb8656",
+    "order": 0,
+    "width": 0,
+    "height": 0,
+    "label": "frequency",
+    "chartType": "line",
+    "legend": "false",
+    "xformat": "HH:mm:ss",
+    "interpolate": "linear",
+    "nodata": "",
+    "dot": false,
+    "ymin": "40",
+    "ymax": "80",
+    "removeOlder": 1,
+    "removeOlderPoints": "",
+    "removeOlderUnit": "60",
+    "cutout": 0,
+    "useOneColor": false,
+    "colors": [
+      "#1f77b4",
+      "#aec7e8",
+      "#ff7f0e",
+      "#2ca02c",
+      "#98df8a",
+      "#d62728",
+      "#ff9896",
+      "#9467bd",
+      "#c5b0d5"
+    ],
+    "useOldStyle": true,
+    "x": 999.5,
+    "y": 132.683349609375,
+    "wires": [
+      [],
+      []
+    ]
+  },
+  {
+    "id": "a095d682.5a5108",
+    "type": "function",
+    "z": "c66d94c1.d64998",
+    "name": "Prepare for Visualization",
+    "func": "msg.payload=msg.payload.d.frequency;\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 790.5,
+    "y": 131.933349609375,
+    "wires": [
+      [
+        "5f434daf.ea7164"
+      ]
+    ]
+  },
+  {
+    "id": "c93839f9.2efbf8",
+    "type": "comment",
+    "z": "c66d94c1.d64998",
+    "name": "to your own service (APIfy)",
+    "info": "",
+    "x": 990,
+    "y": 340,
+    "wires": []
+  },
+  {
+    "id": "2e48e802.ef5bf8",
+    "type": "debug",
+    "z": "c66d94c1.d64998",
+    "name": "alerts",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "true",
+    "x": 790,
+    "y": 560,
+    "wires": []
+  },
+  {
+    "id": "e67dc094.b5d05",
+    "type": "function",
+    "z": "c66d94c1.d64998",
+    "name": "add timestamp",
+    "func": "var time = new Date().getTime()/1000;\nmsg.timestamp = time - msg.to; // seconds\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 620,
+    "y": 560,
+    "wires": [
+      [
+        "2e48e802.ef5bf8"
+      ]
+    ]
+  },
+  {
+    "id": "60bd8f3b.65809",
+    "type": "debug",
+    "z": "c66d94c1.d64998",
+    "name": "",
+    "active": false,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "false",
+    "x": 490,
+    "y": 160,
+    "wires": []
+  },
+  {
+    "id": "326c9958.cb8656",
+    "type": "ui_group",
+    "z": "",
+    "name": "Anomaly Dashboard",
+    "tab": "10c663bf.dee7ac",
+    "disp": true,
+    "width": "6"
+  },
+  {
+    "id": "10c663bf.dee7ac",
+    "type": "ui_tab",
+    "z": "",
+    "name": "Voltage",
+    "icon": "dashboard"
+  }
+]
