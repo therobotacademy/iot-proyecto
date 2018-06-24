@@ -1,0 +1,162 @@
+[
+  {
+    "id": "3e4c8488.2aabdc",
+    "type": "start virtual device",
+    "z": "6ae93199.adc43",
+    "name": "Ultrasound sensor",
+    "deviceId": "01",
+    "schema": "c1f7bbe8.a24df8",
+    "outputs": 1,
+    "x": 390,
+    "y": 140,
+    "wires": [
+      [
+        "791026c6.04a608",
+        "c0e5ebf6.661128"
+      ]
+    ]
+  },
+  {
+    "id": "2d67b13c.03399e",
+    "type": "inject",
+    "z": "6ae93199.adc43",
+    "name": "",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "x": 100,
+    "y": 80,
+    "wires": [
+      [
+        "4db858e8.8ffd78"
+      ]
+    ]
+  },
+  {
+    "id": "c0e5ebf6.661128",
+    "type": "debug",
+    "z": "6ae93199.adc43",
+    "name": "",
+    "active": true,
+    "console": "false",
+    "complete": "true",
+    "x": 770,
+    "y": 160,
+    "wires": []
+  },
+  {
+    "id": "4db858e8.8ffd78",
+    "type": "function",
+    "z": "6ae93199.adc43",
+    "name": "count & to",
+    "func": "// initialise the counter to 0 if it doesn't exist already\nvar count = context.get('count')||0;\nvar to    = context.get('to')||0;\ncount += 1;\n\n\n// store the value back\ncontext.set('count',count);\n// make it part of the outgoing msg object\nmsg.count = count;\n\n// Set the start time (in the first count)\nif (count == 1) {\n    to = new Date().getTime()/1000;\n    context.set('to',to);\n}\nmsg.to = to;\n\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 200,
+    "y": 140,
+    "wires": [
+      [
+        "3e4c8488.2aabdc"
+      ]
+    ]
+  },
+  {
+    "id": "791026c6.04a608",
+    "type": "function",
+    "z": "6ae93199.adc43",
+    "name": "Prepare for Visualization",
+    "func": "msg.payload = msg.payload.properties.distance_random;\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 570,
+    "y": 80,
+    "wires": [
+      [
+        "8096f7ba.de2608",
+        "c0e5ebf6.661128"
+      ]
+    ]
+  },
+  {
+    "id": "8096f7ba.de2608",
+    "type": "ui_chart",
+    "z": "6ae93199.adc43",
+    "name": "",
+    "group": "2831e2c6.6881ee",
+    "order": 0,
+    "width": 0,
+    "height": 0,
+    "label": "distance_random",
+    "chartType": "line",
+    "legend": "false",
+    "xformat": "HH:mm:ss",
+    "interpolate": "linear",
+    "nodata": "",
+    "dot": false,
+    "ymin": "",
+    "ymax": "",
+    "removeOlder": 1,
+    "removeOlderPoints": "",
+    "removeOlderUnit": "3600",
+    "cutout": 0,
+    "useOneColor": false,
+    "colors": [
+      "#1f77b4",
+      "#aec7e8",
+      "#ff7f0e",
+      "#2ca02c",
+      "#98df8a",
+      "#d62728",
+      "#ff9896",
+      "#9467bd",
+      "#c5b0d5"
+    ],
+    "x": 830,
+    "y": 80,
+    "wires": [
+      [],
+      []
+    ]
+  },
+  {
+    "id": "c1f7bbe8.a24df8",
+    "type": "Device Schema",
+    "z": "",
+    "deviceType": "HC-SR04",
+    "props": [
+      {
+        "guid": "c9ae014bc1aa",
+        "name": "distance_random",
+        "random": {
+          "func": "integer",
+          "args": {
+            "min": 2,
+            "max": 450
+          }
+        }
+      }
+    ],
+    "evts": []
+  },
+  {
+    "id": "2831e2c6.6881ee",
+    "type": "ui_group",
+    "z": "",
+    "name": "Registro",
+    "tab": "8beb9654.11f528",
+    "order": 1,
+    "disp": true,
+    "width": "6"
+  },
+  {
+    "id": "8beb9654.11f528",
+    "type": "ui_tab",
+    "z": "",
+    "name": "Ultrasound data",
+    "icon": "dashboard",
+    "order": 2
+  }
+]
