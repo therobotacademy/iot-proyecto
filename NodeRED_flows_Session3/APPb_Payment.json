@@ -1,0 +1,962 @@
+[
+  {
+    "id": "30faf3c6.2434ec",
+    "type": "subflow",
+    "name": "[6] INVOICE",
+    "info": "",
+    "in": [
+      {
+        "x": 40,
+        "y": 40,
+        "wires": [
+          {
+            "id": "a196ae8b.6b2ef"
+          }
+        ]
+      }
+    ],
+    "out": [
+      {
+        "x": 700,
+        "y": 40,
+        "wires": [
+          {
+            "id": "a0efb2d0.04b35",
+            "port": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "a0efb2d0.04b35",
+    "type": "delay",
+    "z": "30faf3c6.2434ec",
+    "name": "Show INVOICE for 2s",
+    "pauseType": "delay",
+    "timeout": "2",
+    "timeoutUnits": "seconds",
+    "rate": "1",
+    "nbRateUnits": "1",
+    "rateUnits": "second",
+    "randomFirst": "1",
+    "randomLast": "5",
+    "randomUnits": "seconds",
+    "drop": false,
+    "x": 500,
+    "y": 40,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "a196ae8b.6b2ef",
+    "type": "switch",
+    "z": "30faf3c6.2434ec",
+    "name": "REFUELING to INVOICE",
+    "property": "payload",
+    "propertyType": "msg",
+    "rules": [
+      {
+        "t": "eq",
+        "v": "REFUELING to INVOICE",
+        "vt": "str"
+      }
+    ],
+    "checkall": "true",
+    "repair": false,
+    "outputs": 1,
+    "x": 230,
+    "y": 40,
+    "wires": [
+      [
+        "a0efb2d0.04b35"
+      ]
+    ]
+  },
+  {
+    "id": "43c3905a.7e359",
+    "type": "subflow",
+    "name": "[5] REFUELING",
+    "info": "",
+    "in": [
+      {
+        "x": 40,
+        "y": 40,
+        "wires": [
+          {
+            "id": "aadcad5f.83351"
+          }
+        ]
+      }
+    ],
+    "out": [
+      {
+        "x": 760,
+        "y": 40,
+        "wires": [
+          {
+            "id": "93aa89e5.3f1d78",
+            "port": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "aadcad5f.83351",
+    "type": "switch",
+    "z": "43c3905a.7e359",
+    "name": "PAYMENT to REFUELING",
+    "property": "payload",
+    "propertyType": "msg",
+    "rules": [
+      {
+        "t": "eq",
+        "v": "PAYMENT to REFUELING",
+        "vt": "str"
+      }
+    ],
+    "checkall": "true",
+    "repair": false,
+    "outputs": 1,
+    "x": 240,
+    "y": 40,
+    "wires": [
+      [
+        "93aa89e5.3f1d78"
+      ]
+    ]
+  },
+  {
+    "id": "93aa89e5.3f1d78",
+    "type": "delay",
+    "z": "43c3905a.7e359",
+    "name": "Show REFUELING for 2s",
+    "pauseType": "delay",
+    "timeout": "2",
+    "timeoutUnits": "seconds",
+    "rate": "1",
+    "nbRateUnits": "1",
+    "rateUnits": "second",
+    "randomFirst": "1",
+    "randomLast": "5",
+    "randomUnits": "seconds",
+    "drop": false,
+    "x": 510,
+    "y": 40,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "10f37865.6aef58",
+    "type": "subflow",
+    "name": "(3) INPUT",
+    "info": "",
+    "in": [
+      {
+        "x": 100,
+        "y": 140,
+        "wires": [
+          {
+            "id": "120623b7.d14a8c"
+          }
+        ]
+      }
+    ],
+    "out": [
+      {
+        "x": 820,
+        "y": 140,
+        "wires": [
+          {
+            "id": "c1edad81.ce5ce",
+            "port": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "120623b7.d14a8c",
+    "type": "switch",
+    "z": "10f37865.6aef58",
+    "name": "IDENTIFICATION to INPUT",
+    "property": "payload",
+    "propertyType": "msg",
+    "rules": [
+      {
+        "t": "eq",
+        "v": "IDENTIFICATION to INPUT",
+        "vt": "str"
+      }
+    ],
+    "checkall": "true",
+    "repair": false,
+    "outputs": 1,
+    "x": 340,
+    "y": 140,
+    "wires": [
+      [
+        "c1edad81.ce5ce"
+      ]
+    ]
+  },
+  {
+    "id": "c1edad81.ce5ce",
+    "type": "delay",
+    "z": "10f37865.6aef58",
+    "name": "Show INPUT for 1 s",
+    "pauseType": "delay",
+    "timeout": "1",
+    "timeoutUnits": "seconds",
+    "rate": "1",
+    "nbRateUnits": "1",
+    "rateUnits": "second",
+    "randomFirst": "1",
+    "randomLast": "5",
+    "randomUnits": "seconds",
+    "drop": false,
+    "x": 600,
+    "y": 140,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "858ac742.27d7a8",
+    "type": "subflow",
+    "name": "(2) IDENTIFICATION",
+    "info": "",
+    "in": [
+      {
+        "x": 100,
+        "y": 100,
+        "wires": [
+          {
+            "id": "4a961ce7.65ca04"
+          }
+        ]
+      }
+    ],
+    "out": [
+      {
+        "x": 880,
+        "y": 100,
+        "wires": [
+          {
+            "id": "d278fa4d.405718",
+            "port": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "4a961ce7.65ca04",
+    "type": "switch",
+    "z": "858ac742.27d7a8",
+    "name": "DETECTION to IDENTIFICATION",
+    "property": "payload",
+    "propertyType": "msg",
+    "rules": [
+      {
+        "t": "eq",
+        "v": "DETECTION to IDENTIFICATION",
+        "vt": "str"
+      }
+    ],
+    "checkall": "true",
+    "repair": false,
+    "outputs": 1,
+    "x": 340,
+    "y": 100,
+    "wires": [
+      [
+        "d278fa4d.405718"
+      ]
+    ]
+  },
+  {
+    "id": "d278fa4d.405718",
+    "type": "delay",
+    "z": "858ac742.27d7a8",
+    "name": "Show IDENTIFICATION for 2s",
+    "pauseType": "delay",
+    "timeout": "2",
+    "timeoutUnits": "seconds",
+    "rate": "1",
+    "nbRateUnits": "1",
+    "rateUnits": "second",
+    "randomFirst": "1",
+    "randomLast": "5",
+    "randomUnits": "seconds",
+    "drop": false,
+    "x": 670,
+    "y": 100,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "ced46e98.162e6",
+    "type": "subflow",
+    "name": "(4) PAYMENT",
+    "info": "",
+    "in": [
+      {
+        "x": 180,
+        "y": 100,
+        "wires": [
+          {
+            "id": "c74aafd4.43359"
+          }
+        ]
+      }
+    ],
+    "out": [
+      {
+        "x": 820,
+        "y": 100,
+        "wires": [
+          {
+            "id": "19bfeaa3.477405",
+            "port": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "d75009f0.2eb588",
+    "type": "switch",
+    "z": "ced46e98.162e6",
+    "name": "INPUT to PAYMENT",
+    "property": "payload",
+    "propertyType": "msg",
+    "rules": [
+      {
+        "t": "eq",
+        "v": "INPUT to PAYMENT",
+        "vt": "str"
+      }
+    ],
+    "checkall": "true",
+    "repair": false,
+    "outputs": 1,
+    "x": 360,
+    "y": 560,
+    "wires": [
+      [
+        "2e74432e.36204c"
+      ]
+    ]
+  },
+  {
+    "id": "2e74432e.36204c",
+    "type": "delay",
+    "z": "ced46e98.162e6",
+    "name": "Show PAYMENT for 2s",
+    "pauseType": "delay",
+    "timeout": "2",
+    "timeoutUnits": "seconds",
+    "rate": "1",
+    "nbRateUnits": "1",
+    "rateUnits": "second",
+    "randomFirst": "1",
+    "randomLast": "5",
+    "randomUnits": "seconds",
+    "drop": false,
+    "x": 600,
+    "y": 560,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "c74aafd4.43359",
+    "type": "ui_button",
+    "z": "ced46e98.162e6",
+    "name": "",
+    "group": "cdb25303.90c6e",
+    "order": 0,
+    "width": 0,
+    "height": 0,
+    "passthru": false,
+    "label": "Unlock_door",
+    "color": "",
+    "bgcolor": "",
+    "icon": "admin",
+    "payload": "true",
+    "payloadType": "bool",
+    "topic": "show",
+    "x": 150,
+    "y": 340,
+    "wires": [
+      [
+        "584e0854.d2fa18"
+      ]
+    ]
+  },
+  {
+    "id": "6b1d7f11.cfe4e",
+    "type": "function",
+    "z": "ced46e98.162e6",
+    "name": "verify_pin",
+    "func": "var pins = [\"1111\"];\nvar verified = false;\n\nfor(var i=0;i<pins.length;i++){\n    if(msg.passcode == pins[i]){\n        verified = true;\n        break;\n    }\n}\n\nmsg.verified = verified;\n\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 535.6250038146973,
+    "y": 340.0000057220459,
+    "wires": [
+      [
+        "18e37cea.d65903"
+      ]
+    ]
+  },
+  {
+    "id": "18e37cea.d65903",
+    "type": "switch",
+    "z": "ced46e98.162e6",
+    "name": "check",
+    "property": "verified",
+    "propertyType": "msg",
+    "rules": [
+      {
+        "t": "true"
+      },
+      {
+        "t": "false"
+      }
+    ],
+    "checkall": "false",
+    "outputs": 2,
+    "x": 744.1250038146973,
+    "y": 340.0000057220459,
+    "wires": [
+      [
+        "19bfeaa3.477405"
+      ],
+      [
+        "cf7ab958.de39b8"
+      ]
+    ]
+  },
+  {
+    "id": "d846d203.1311e",
+    "type": "ui_toast",
+    "z": "ced46e98.162e6",
+    "position": "top right",
+    "displayTime": "3",
+    "outputs": 0,
+    "ok": "OK",
+    "cancel": "",
+    "topic": "",
+    "name": "",
+    "x": 1130.1250038146973,
+    "y": 333.0000057220459,
+    "wires": []
+  },
+  {
+    "id": "19bfeaa3.477405",
+    "type": "function",
+    "z": "ced46e98.162e6",
+    "name": "pin_ok",
+    "func": "var msg2 = {};\nmsg2.topic = \"Pin successfully verified!\";\nmsg2.payload = \"\";\n    \nreturn [msg, msg2];",
+    "outputs": "2",
+    "noerr": 0,
+    "x": 905.1250038146973,
+    "y": 220.0000057220459,
+    "wires": [
+      [
+        "6b1fa126.eaeec"
+      ],
+      [
+        "d846d203.1311e"
+      ]
+    ]
+  },
+  {
+    "id": "cf7ab958.de39b8",
+    "type": "function",
+    "z": "ced46e98.162e6",
+    "name": "pin_error",
+    "func": " msg.topic = \"Wrong PIN\";\n msg.payload = \"\";\n    \nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 920.1250038146973,
+    "y": 438.0000057220459,
+    "wires": [
+      [
+        "d846d203.1311e"
+      ]
+    ]
+  },
+  {
+    "id": "584e0854.d2fa18",
+    "type": "ui_template",
+    "z": "ced46e98.162e6",
+    "group": "588f3621.31d6a8",
+    "name": "Pin_Unlock",
+    "order": 0,
+    "width": "0",
+    "height": "0",
+    "format": "<div ng-init=\"init()\" id=\"pin_insert\" class=\"dialog\">\n    \n    <div class=\"dialog_content\">\n        \n        <div class=\"dialog_header\">\n            <span ng-click=\"closeDialog()\" class=\"close\">&times;</span>\n            <h2>Insert PIN</h2>\n        </div>\n        \n        <div class=\"dialog_body\">\n\n           <div layout=\"row\" layout-align=\"center\">\n                <div class=\"number_placeholder\">\n                    {{passcode.substring(0, 1)}}\n                </div>\n                <div class=\"number_placeholder\">\n                    {{passcode.substring(1, 2)}}\n                </div>\n                <div class=\"number_placeholder\">\n                    {{passcode.substring(2, 3)}}\n                </div>\n                <div class=\"number_placeholder\">\n                    {{passcode.substring(3, 4)}}\n                </div>\n            </div>\n            \n            <div layout=\"column\" layout-align=\"center\" style=\"margin-top: 50px\">\n                <div layout=\"row\" layout-align=\"center\">\n                    <div class=\"number_box\">\n                        <md-button class=\"md-raised\" ng-click=\"add(1)\">1</md-button>\n                    </div>\n                    <div class=\"number_box\">\n                        <md-button class=\"md-raised\" ng-click=\"add(2)\">2</md-button>\n                    </div>\n                    <div class=\"number_box\">\n                        <md-button class=\"md-raised\" ng-click=\"add(3)\">3</md-button>\n                    </div>\n                </div>\n                 <div layout=\"row\" layout-align=\"center\">\n                    <div class=\"number_box\">\n                        <md-button class=\"md-raised\" ng-click=\"add(4)\">4</md-button>\n                    </div>\n                    <div class=\"number_box\">\n                        <md-button class=\"md-raised\" ng-click=\"add(5)\">5</md-button>\n                    </div>\n                    <div class=\"number_box\">\n                        <md-button class=\"md-raised\" ng-click=\"add(6)\">6</md-button>\n                    </div>\n                </div>\n                 <div layout=\"row\" layout-align=\"center\">\n                    <div class=\"number_box\">\n                        <md-button class=\"md-raised\" ng-click=\"add(7)\">7</md-button>\n                    </div>\n                    <div class=\"number_box\">\n                        <md-button class=\"md-raised\" ng-click=\"add(8)\">8</md-button>\n                    </div>\n                    <div class=\"number_box\">\n                        <md-button class=\"md-raised\" ng-click=\"add(9)\">9</md-button>\n                    </div>\n                </div>\n                 <div layout=\"row\" layout-align=\"center\">\n                    <div class=\"number_box\">\n                        <md-button class=\"md-raised\" ng-click=\"confirm()\">\n                            <ng-md-icon icon=\"done\" style=\"color:#fff;\"></ng-md-icon>\n                        </md-button>\n                    </div>\n                    <div class=\"number_box\">\n                        <md-button class=\"md-raised\" ng-click=\"add(0)\">0</md-button>\n                    </div>\n                    <div class=\"number_box\">\n                        <md-button class=\"md-raised\" ng-click=\"delete()\">\n                            <ng-md-icon icon=\"arrow_back\" style=\"color:#fff;\"></ng-md-icon>\n                        </md-button>\n                    </div>\n                </div>\n            </div> \n          \n        </div> <!--dialog_body-->\n    </div> <!--dialog_content-->\n</div>  <!--dialog-->\n\n\n<style>\n\n/* The Dialog (background) */\n.dialog {\n    display: none; /* Hidden by default */\n    position: fixed; /* Stay in place */\n    z-index: 9999; /* Sit on top */\n    left: 0;\n    top: 0;\n    width: 100%; /* Full width */\n    height: 100%; /* Full height */\n    overflow: auto; /* Enable scroll if needed */\n    background-color: rgb(0,0,0); /* Fallback color */\n    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */\n    -webkit-transform: translateZ(0px);\n    -webkit-transform: translate3d(0,0,0);\n    -webkit-perspective: 1000;\n}\n\n.dialog_content {\n    position: absolute;\n    background-color: #fff;\n    margin-top: 10%;\n    margin-left: 40%;\n    padding: 0;\n    width: 345px;\n    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);\n    -webkit-animation-name: animatetop;\n    animation-name: animatetop;\n    animation-duration: 0.4s;\n}\n\n/* Media query for smartphones (to Fix?) */\n@media only screen and (min-device-width : 375px) and (max-device-width : 667px) { \n    .dialog_content {\n    margin-top: 5%;\n    margin-left: 5%;\n}\n}\n\n/* Add Animation */\n@-webkit-keyframes animatetop {\n    from {top: -300px; opacity: 0} \n    to {top: 0; opacity: 1}\n}\n\n@keyframes animatetop {\n    from {top: -300px; opacity: 0}\n    to {top: 0; opacity: 1}\n}\n\n/* Dialog Header */\n.dialog_header {\n    padding: 2px 16px;\n    background-color: #03A9F4;\n    color: white;\n}\n\n/* Dialog Body */\n.dialog_body {padding: 16px 16px;}\n\n/* The Close Button */\n.close {\n    color: #fff;\n    float: right;\n    font-size: 28px;\n    font-weight: bold;\n}\n\n.close:hover,\n.close:focus {\n    color: #1565C0;\n    text-decoration: none;\n    cursor: pointer;\n}\n\n/* __ */\n.number_placeholder{\n    width: 50px;\n    height: 34px;\n    margin: 10px;\n    font-size: 20pt;\n    text-align: center;\n    border-bottom: 1px solid black;\n}\n\n/* Number container */\n.number_box{\n    margin: 10px;\n}\n\n/* Buttons style */\n.md-button.md-default-theme.md-raised, .md-button.md-raised{\n    min-height: 50px;\n    min-width: 50px;\n    font-weight: bold;\n    margin: 0px 10px 10px 0px;\n    box-shadow: 4px 4px 6px 0 #dadada;\n    background-color: #29B6F6;\n    color: #fff;\n}\n\n.md-button.md-default-theme.md-raised:not([disabled]):hover, .md-button.md-raised:not([disabled]):hover{\n    background-color: #03A9F4;\n}\n\n.btn1 {\n  color : rgb(49, 46, 46);\n  background-color: rgba(255, 222, 121, 0.96);\n  border-radius: 10px 0 0 10px;\n  font-size: 16px;\n}\n\n.btn1:not([disabled]):hover {\n  background-color: rgba(107, 103, 91, 0.96);\n  color: white;\n}\n\n.btn1[disabled] {\n  color : rgb(187, 187, 187);\n  background-color: rgba(230, 230, 229, 0.96);\n}\n\n</style>\n\n<script>\n\n/**\n * pin_dialog.js\n * Node-Red UI template for Node-Red Dashboard. \n * Custom dialog that asks for a PIN to allow actions\n * Enjoy it :). \n * -- Daniel\n *\n *\n * @license The Unlicense, http://unlicense.org/\n * @version 0.1\n * @author  Daniel Lando, https://github.com/robertsLando\n * @updated 2017-03-08\n * @link    ----\n *\n *\n */\n\nvar dialog;\n\n/* ==== */\n(function(scope) {\n    \n    scope.passcode = \"\";\n    scope.payload = \"\";\n    scope.inited = false;\n    \n    scope.init = function() {\n        scope.passcode = \"\";\n        //Hide the md-panel\n        $('#pin_insert').parent().parent().css(\"display\", \"none\");\n        //This trick make it works on smartphones too :)\n        dialog = $('#pin_insert').detach();\n        dialog.appendTo(document.body);\n    }\n    \n    scope.showDialog = function() {\n        dialog.css(\"display\", \"block\");\n    }\n    \n    scope.closeDialog = function(){\n        dialog.css(\"display\", \"none\");\n    }\n    \n    scope.add = function(value) {\n        if(scope.passcode.length < 4) {\n            scope.passcode = scope.passcode + value;\n            if(scope.passcode.length == 4) {\n                console.log(\"The four digit code was entered\");\n                   \n            }\n        }\n    }\n \n    scope.delete = function() {\n        if(scope.passcode.length > 0) {\n            scope.passcode = scope.passcode.substring(0, scope.passcode.length - 1);\n        }\n    }\n    \n    scope.confirm = function() {\n        if(scope.passcode.length == 4) {\n            scope.send({passcode: scope.passcode, payload : scope.payload});\n            scope.closeDialog();\n            scope.passcode = \"\";\n            scope.payload = \"\";\n        }\n    }\n\n    scope.$watch('msg', function(data) {\n        if(data && data.topic){\n            switch(data.topic){\n               case \"show\":\n                   if(scope.inited){\n                        scope.payload = data.payload;\n                        scope.showDialog();\n                   }\n                   else\n                        scope.inited = true;\n                break;\n                case \"close\": \n                    scope.closeDialog(); \n                break;\n            }\n        }\n    });\n})(scope);\n\n</script>\n",
+    "storeOutMessages": false,
+    "fwdInMessages": false,
+    "templateScope": "local",
+    "x": 341.3750343322754,
+    "y": 339.9642696380615,
+    "wires": [
+      [
+        "6b1d7f11.cfe4e"
+      ]
+    ]
+  },
+  {
+    "id": "6b1fa126.eaeec",
+    "type": "debug",
+    "z": "ced46e98.162e6",
+    "name": "do_Something",
+    "active": true,
+    "console": "false",
+    "complete": "payload",
+    "x": 1101.8750038146973,
+    "y": 213.7500057220459,
+    "wires": []
+  },
+  {
+    "id": "cdb25303.90c6e",
+    "type": "ui_group",
+    "z": "",
+    "name": "Press to Pay",
+    "tab": "1fb69484.19111b",
+    "order": 2,
+    "disp": true,
+    "width": "6",
+    "collapse": false
+  },
+  {
+    "id": "588f3621.31d6a8",
+    "type": "ui_group",
+    "z": "",
+    "name": "Dial PIN",
+    "tab": "1fb69484.19111b",
+    "disp": false,
+    "width": "1",
+    "collapse": false
+  },
+  {
+    "id": "1fb69484.19111b",
+    "type": "ui_tab",
+    "z": "",
+    "name": "APP Refueling",
+    "icon": "dashboard",
+    "order": 5
+  },
+  {
+    "id": "ead9f677.3be798",
+    "type": "subflow",
+    "name": "(1) DETECTION",
+    "info": "",
+    "in": [
+      {
+        "x": 120,
+        "y": 120,
+        "wires": [
+          {
+            "id": "2257308c.a97fc"
+          }
+        ]
+      }
+    ],
+    "out": [
+      {
+        "x": 900,
+        "y": 120,
+        "wires": [
+          {
+            "id": "72031e8b.2ded4",
+            "port": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "2257308c.a97fc",
+    "type": "switch",
+    "z": "ead9f677.3be798",
+    "name": "STAND-BY to DETECTION",
+    "property": "payload",
+    "propertyType": "msg",
+    "rules": [
+      {
+        "t": "eq",
+        "v": "STAND-BY to DETECTION",
+        "vt": "str"
+      }
+    ],
+    "checkall": "true",
+    "repair": false,
+    "outputs": 1,
+    "x": 340,
+    "y": 120,
+    "wires": [
+      [
+        "72031e8b.2ded4"
+      ]
+    ]
+  },
+  {
+    "id": "72031e8b.2ded4",
+    "type": "delay",
+    "z": "ead9f677.3be798",
+    "name": "Stay in DETECTION for 1s",
+    "pauseType": "delay",
+    "timeout": "1",
+    "timeoutUnits": "seconds",
+    "rate": "1",
+    "nbRateUnits": "1",
+    "rateUnits": "second",
+    "randomFirst": "1",
+    "randomLast": "5",
+    "randomUnits": "seconds",
+    "drop": false,
+    "x": 660,
+    "y": 120,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "8ae48a1b.0b9008",
+    "type": "FSM",
+    "z": "4be471e0.6c17d",
+    "name": "Fuel Station",
+    "topic": "FUEL_STATION",
+    "initstate": "STAND-BY",
+    "inittran": "TR_INIT",
+    "entry": true,
+    "exit": false,
+    "tran": true,
+    "rules": [
+      {
+        "n": "STAND-BY to DETECTION",
+        "c": "CHANGE",
+        "s": "STAND-BY",
+        "d": "DETECTION",
+        "t": "true"
+      },
+      {
+        "n": "DETECTION to IDENTIFICATION",
+        "c": "CHANGE",
+        "s": "DETECTION",
+        "d": "IDENTIFICATION",
+        "t": "true"
+      },
+      {
+        "n": "IDENTIFICATION to INPUT",
+        "c": "CHANGE",
+        "s": "IDENTIFICATION",
+        "d": "INPUT",
+        "t": "true"
+      },
+      {
+        "n": "INPUT to PAYMENT",
+        "c": "CHANGE",
+        "s": "INPUT",
+        "d": "PAYMENT",
+        "t": "true"
+      },
+      {
+        "n": "PAYMENT to REFUELING",
+        "c": "CHANGE",
+        "s": "PAYMENT",
+        "d": "REFUELING",
+        "t": "true"
+      },
+      {
+        "n": "REFUELING to INVOICE",
+        "c": "CHANGE",
+        "s": "REFUELING",
+        "d": "INVOICE",
+        "t": "true"
+      },
+      {
+        "n": "INVOICE to STAND-BY",
+        "c": "CHANGE",
+        "s": "INVOICE",
+        "d": "STAND-BY",
+        "t": "true"
+      }
+    ],
+    "x": 510,
+    "y": 220,
+    "wires": [
+      [
+        "c2851cf4.99568"
+      ]
+    ]
+  },
+  {
+    "id": "247f452e.8a9b0a",
+    "type": "change",
+    "z": "4be471e0.6c17d",
+    "name": "CHANGE",
+    "rules": [
+      {
+        "t": "set",
+        "p": "topic",
+        "pt": "msg",
+        "to": "CHANGE",
+        "tot": "str"
+      },
+      {
+        "t": "set",
+        "p": "payload",
+        "pt": "msg",
+        "to": "true",
+        "tot": "bool"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 1160,
+    "y": 500,
+    "wires": [
+      [
+        "8ae48a1b.0b9008"
+      ]
+    ]
+  },
+  {
+    "id": "46656af.7f12b94",
+    "type": "comment",
+    "z": "4be471e0.6c17d",
+    "name": "Sample APP pattern for Autonomous Refueling Station",
+    "info": "Note that under UK law, the amber light must\nbe showing for 3 seconds.\n\nSequence is:\n\n- RED\n- RED+AMBER\n- GREEN\n- AMBER\n- RED\n\nIn this finite state machine, we only need\none transition, called `CHANGE` since we only\nneed to rotate through each state in turn.\n\nIn this flow example, we use the transition\noutput to control the sequence and take the\nentry output as the actual light(s) showing.",
+    "x": 370,
+    "y": 80,
+    "wires": []
+  },
+  {
+    "id": "9cb35c89.b8d9",
+    "type": "inject",
+    "z": "4be471e0.6c17d",
+    "name": "",
+    "topic": "CHANGE",
+    "payload": "true",
+    "payloadType": "bool",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "onceDelay": "",
+    "x": 290,
+    "y": 220,
+    "wires": [
+      [
+        "8ae48a1b.0b9008"
+      ]
+    ]
+  },
+  {
+    "id": "dfff6d9.df9ed9",
+    "type": "debug",
+    "z": "4be471e0.6c17d",
+    "name": "transition",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "payload",
+    "x": 920,
+    "y": 660,
+    "wires": []
+  },
+  {
+    "id": "9f85e9a2.279328",
+    "type": "debug",
+    "z": "4be471e0.6c17d",
+    "name": "exit",
+    "active": false,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "payload",
+    "x": 1030,
+    "y": 180,
+    "wires": []
+  },
+  {
+    "id": "2828856a.745b6a",
+    "type": "debug",
+    "z": "4be471e0.6c17d",
+    "name": "entry",
+    "active": false,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "payload",
+    "x": 1030,
+    "y": 120,
+    "wires": []
+  },
+  {
+    "id": "c2851cf4.99568",
+    "type": "switch",
+    "z": "4be471e0.6c17d",
+    "name": "entry\\exit\\transition",
+    "property": "payload",
+    "propertyType": "msg",
+    "rules": [
+      {
+        "t": "cont",
+        "v": "_entry",
+        "vt": "str"
+      },
+      {
+        "t": "cont",
+        "v": "_exit",
+        "vt": "str"
+      },
+      {
+        "t": "else"
+      }
+    ],
+    "checkall": "true",
+    "repair": false,
+    "outputs": 3,
+    "x": 730,
+    "y": 220,
+    "wires": [
+      [
+        "2828856a.745b6a"
+      ],
+      [
+        "9f85e9a2.279328"
+      ],
+      [
+        "a0a2a75b.910e38",
+        "70960301.db4e9c",
+        "8730bed9.b7d92",
+        "bdcd9451.dcda28",
+        "a1aa649c.4fbd18",
+        "91b4b075.60cea",
+        "4f38550e.e62e3c"
+      ]
+    ]
+  },
+  {
+    "id": "ad57b8cb.a611f8",
+    "type": "comment",
+    "z": "4be471e0.6c17d",
+    "name": "Otherwise is  '_transition' (does not append anything)",
+    "info": "Does not append anything",
+    "x": 1090,
+    "y": 280,
+    "wires": []
+  },
+  {
+    "id": "a0a2a75b.910e38",
+    "type": "debug",
+    "z": "4be471e0.6c17d",
+    "name": "transition",
+    "active": false,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "payload",
+    "x": 1040,
+    "y": 240,
+    "wires": []
+  },
+  {
+    "id": "70960301.db4e9c",
+    "type": "subflow:ead9f677.3be798",
+    "z": "4be471e0.6c17d",
+    "name": "",
+    "x": 510,
+    "y": 380,
+    "wires": [
+      [
+        "247f452e.8a9b0a",
+        "dfff6d9.df9ed9"
+      ]
+    ]
+  },
+  {
+    "id": "a1aa649c.4fbd18",
+    "type": "subflow:ced46e98.162e6",
+    "z": "4be471e0.6c17d",
+    "name": "",
+    "x": 510,
+    "y": 560,
+    "wires": [
+      [
+        "247f452e.8a9b0a",
+        "dfff6d9.df9ed9"
+      ]
+    ]
+  },
+  {
+    "id": "8730bed9.b7d92",
+    "type": "subflow:858ac742.27d7a8",
+    "z": "4be471e0.6c17d",
+    "name": "",
+    "x": 490,
+    "y": 440,
+    "wires": [
+      [
+        "247f452e.8a9b0a",
+        "dfff6d9.df9ed9"
+      ]
+    ]
+  },
+  {
+    "id": "bdcd9451.dcda28",
+    "type": "subflow:10f37865.6aef58",
+    "z": "4be471e0.6c17d",
+    "name": "",
+    "x": 520,
+    "y": 500,
+    "wires": [
+      [
+        "247f452e.8a9b0a",
+        "dfff6d9.df9ed9"
+      ]
+    ]
+  },
+  {
+    "id": "91b4b075.60cea",
+    "type": "subflow:43c3905a.7e359",
+    "z": "4be471e0.6c17d",
+    "name": "",
+    "x": 510,
+    "y": 620,
+    "wires": [
+      [
+        "247f452e.8a9b0a",
+        "dfff6d9.df9ed9"
+      ]
+    ]
+  },
+  {
+    "id": "4f38550e.e62e3c",
+    "type": "subflow:30faf3c6.2434ec",
+    "z": "4be471e0.6c17d",
+    "name": "",
+    "x": 520,
+    "y": 680,
+    "wires": [
+      [
+        "247f452e.8a9b0a",
+        "dfff6d9.df9ed9"
+      ]
+    ]
+  }
+]

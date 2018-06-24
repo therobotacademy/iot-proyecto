@@ -29,7 +29,7 @@
     "type": "function",
     "z": "7c68d3e7.64909c",
     "name": "verify_pin",
-    "func": "var pins = [\"2136\"];\nvar verified = false;\n\nfor(var i=0;i<pins.length;i++){\n    if(msg.passcode == pins[i]){\n        verified = true;\n        break;\n    }\n}\n\nmsg.verified = verified;\n\nreturn msg;",
+    "func": "var pins = [\"1111\"];\nvar verified = false;\n\nfor(var i=0;i<pins.length;i++){\n    if(msg.passcode == pins[i]){\n        verified = true;\n        break;\n    }\n}\n\nmsg.verified = verified;\n\nreturn msg;",
     "outputs": 1,
     "noerr": 0,
     "x": 555.6250038146973,

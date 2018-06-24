@@ -1,0 +1,781 @@
+[
+  {
+    "id": "30faf3c6.2434ec",
+    "type": "subflow",
+    "name": "[6] INVOICE",
+    "info": "",
+    "in": [
+      {
+        "x": 40,
+        "y": 40,
+        "wires": [
+          {
+            "id": "a196ae8b.6b2ef"
+          }
+        ]
+      }
+    ],
+    "out": [
+      {
+        "x": 700,
+        "y": 40,
+        "wires": [
+          {
+            "id": "a0efb2d0.04b35",
+            "port": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "a0efb2d0.04b35",
+    "type": "delay",
+    "z": "30faf3c6.2434ec",
+    "name": "Show INVOICE for 2s",
+    "pauseType": "delay",
+    "timeout": "2",
+    "timeoutUnits": "seconds",
+    "rate": "1",
+    "nbRateUnits": "1",
+    "rateUnits": "second",
+    "randomFirst": "1",
+    "randomLast": "5",
+    "randomUnits": "seconds",
+    "drop": false,
+    "x": 500,
+    "y": 40,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "a196ae8b.6b2ef",
+    "type": "switch",
+    "z": "30faf3c6.2434ec",
+    "name": "REFUELING to INVOICE",
+    "property": "payload",
+    "propertyType": "msg",
+    "rules": [
+      {
+        "t": "eq",
+        "v": "REFUELING to INVOICE",
+        "vt": "str"
+      }
+    ],
+    "checkall": "true",
+    "repair": false,
+    "outputs": 1,
+    "x": 230,
+    "y": 40,
+    "wires": [
+      [
+        "a0efb2d0.04b35"
+      ]
+    ]
+  },
+  {
+    "id": "43c3905a.7e359",
+    "type": "subflow",
+    "name": "[5] REFUELING",
+    "info": "",
+    "in": [
+      {
+        "x": 40,
+        "y": 40,
+        "wires": [
+          {
+            "id": "aadcad5f.83351"
+          }
+        ]
+      }
+    ],
+    "out": [
+      {
+        "x": 760,
+        "y": 40,
+        "wires": [
+          {
+            "id": "93aa89e5.3f1d78",
+            "port": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "aadcad5f.83351",
+    "type": "switch",
+    "z": "43c3905a.7e359",
+    "name": "PAYMENT to REFUELING",
+    "property": "payload",
+    "propertyType": "msg",
+    "rules": [
+      {
+        "t": "eq",
+        "v": "PAYMENT to REFUELING",
+        "vt": "str"
+      }
+    ],
+    "checkall": "true",
+    "repair": false,
+    "outputs": 1,
+    "x": 240,
+    "y": 40,
+    "wires": [
+      [
+        "93aa89e5.3f1d78"
+      ]
+    ]
+  },
+  {
+    "id": "93aa89e5.3f1d78",
+    "type": "delay",
+    "z": "43c3905a.7e359",
+    "name": "Show REFUELING for 2s",
+    "pauseType": "delay",
+    "timeout": "2",
+    "timeoutUnits": "seconds",
+    "rate": "1",
+    "nbRateUnits": "1",
+    "rateUnits": "second",
+    "randomFirst": "1",
+    "randomLast": "5",
+    "randomUnits": "seconds",
+    "drop": false,
+    "x": 510,
+    "y": 40,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "10f37865.6aef58",
+    "type": "subflow",
+    "name": "(3) INPUT",
+    "info": "",
+    "in": [
+      {
+        "x": 100,
+        "y": 140,
+        "wires": [
+          {
+            "id": "120623b7.d14a8c"
+          }
+        ]
+      }
+    ],
+    "out": [
+      {
+        "x": 820,
+        "y": 140,
+        "wires": [
+          {
+            "id": "c1edad81.ce5ce",
+            "port": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "120623b7.d14a8c",
+    "type": "switch",
+    "z": "10f37865.6aef58",
+    "name": "IDENTIFICATION to INPUT",
+    "property": "payload",
+    "propertyType": "msg",
+    "rules": [
+      {
+        "t": "eq",
+        "v": "IDENTIFICATION to INPUT",
+        "vt": "str"
+      }
+    ],
+    "checkall": "true",
+    "repair": false,
+    "outputs": 1,
+    "x": 340,
+    "y": 140,
+    "wires": [
+      [
+        "c1edad81.ce5ce"
+      ]
+    ]
+  },
+  {
+    "id": "c1edad81.ce5ce",
+    "type": "delay",
+    "z": "10f37865.6aef58",
+    "name": "Show INPUT for 1 s",
+    "pauseType": "delay",
+    "timeout": "1",
+    "timeoutUnits": "seconds",
+    "rate": "1",
+    "nbRateUnits": "1",
+    "rateUnits": "second",
+    "randomFirst": "1",
+    "randomLast": "5",
+    "randomUnits": "seconds",
+    "drop": false,
+    "x": 600,
+    "y": 140,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "858ac742.27d7a8",
+    "type": "subflow",
+    "name": "(2) IDENTIFICATION",
+    "info": "",
+    "in": [
+      {
+        "x": 100,
+        "y": 100,
+        "wires": [
+          {
+            "id": "4a961ce7.65ca04"
+          }
+        ]
+      }
+    ],
+    "out": [
+      {
+        "x": 880,
+        "y": 100,
+        "wires": [
+          {
+            "id": "d278fa4d.405718",
+            "port": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "4a961ce7.65ca04",
+    "type": "switch",
+    "z": "858ac742.27d7a8",
+    "name": "DETECTION to IDENTIFICATION",
+    "property": "payload",
+    "propertyType": "msg",
+    "rules": [
+      {
+        "t": "eq",
+        "v": "DETECTION to IDENTIFICATION",
+        "vt": "str"
+      }
+    ],
+    "checkall": "true",
+    "repair": false,
+    "outputs": 1,
+    "x": 340,
+    "y": 100,
+    "wires": [
+      [
+        "d278fa4d.405718"
+      ]
+    ]
+  },
+  {
+    "id": "d278fa4d.405718",
+    "type": "delay",
+    "z": "858ac742.27d7a8",
+    "name": "Show IDENTIFICATION for 2s",
+    "pauseType": "delay",
+    "timeout": "2",
+    "timeoutUnits": "seconds",
+    "rate": "1",
+    "nbRateUnits": "1",
+    "rateUnits": "second",
+    "randomFirst": "1",
+    "randomLast": "5",
+    "randomUnits": "seconds",
+    "drop": false,
+    "x": 670,
+    "y": 100,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "ced46e98.162e6",
+    "type": "subflow",
+    "name": "(4) PAYMENT",
+    "info": "",
+    "in": [
+      {
+        "x": 180,
+        "y": 100,
+        "wires": [
+          {
+            "id": "d451ec6b.4a1bf"
+          }
+        ]
+      }
+    ],
+    "out": [
+      {
+        "x": 800,
+        "y": 100,
+        "wires": [
+          {
+            "id": "bdc0cd7d.3c3f8",
+            "port": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "d451ec6b.4a1bf",
+    "type": "switch",
+    "z": "ced46e98.162e6",
+    "name": "INPUT to PAYMENT",
+    "property": "payload",
+    "propertyType": "msg",
+    "rules": [
+      {
+        "t": "eq",
+        "v": "INPUT to PAYMENT",
+        "vt": "str"
+      }
+    ],
+    "checkall": "true",
+    "repair": false,
+    "outputs": 1,
+    "x": 370,
+    "y": 100,
+    "wires": [
+      [
+        "bdc0cd7d.3c3f8"
+      ]
+    ]
+  },
+  {
+    "id": "bdc0cd7d.3c3f8",
+    "type": "delay",
+    "z": "ced46e98.162e6",
+    "name": "Show PAYMENT for 2s",
+    "pauseType": "delay",
+    "timeout": "2",
+    "timeoutUnits": "seconds",
+    "rate": "1",
+    "nbRateUnits": "1",
+    "rateUnits": "second",
+    "randomFirst": "1",
+    "randomLast": "5",
+    "randomUnits": "seconds",
+    "drop": false,
+    "x": 610,
+    "y": 100,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "ead9f677.3be798",
+    "type": "subflow",
+    "name": "(1) DETECTION",
+    "info": "",
+    "in": [
+      {
+        "x": 120,
+        "y": 120,
+        "wires": [
+          {
+            "id": "2257308c.a97fc"
+          }
+        ]
+      }
+    ],
+    "out": [
+      {
+        "x": 900,
+        "y": 120,
+        "wires": [
+          {
+            "id": "72031e8b.2ded4",
+            "port": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "2257308c.a97fc",
+    "type": "switch",
+    "z": "ead9f677.3be798",
+    "name": "STAND-BY to DETECTION",
+    "property": "payload",
+    "propertyType": "msg",
+    "rules": [
+      {
+        "t": "eq",
+        "v": "STAND-BY to DETECTION",
+        "vt": "str"
+      }
+    ],
+    "checkall": "true",
+    "repair": false,
+    "outputs": 1,
+    "x": 340,
+    "y": 120,
+    "wires": [
+      [
+        "72031e8b.2ded4"
+      ]
+    ]
+  },
+  {
+    "id": "72031e8b.2ded4",
+    "type": "delay",
+    "z": "ead9f677.3be798",
+    "name": "Stay in DETECTION for 1s",
+    "pauseType": "delay",
+    "timeout": "1",
+    "timeoutUnits": "seconds",
+    "rate": "1",
+    "nbRateUnits": "1",
+    "rateUnits": "second",
+    "randomFirst": "1",
+    "randomLast": "5",
+    "randomUnits": "seconds",
+    "drop": false,
+    "x": 660,
+    "y": 120,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "8ae48a1b.0b9008",
+    "type": "FSM",
+    "z": "4be471e0.6c17d",
+    "name": "Fuel Station",
+    "topic": "FUEL_STATION",
+    "initstate": "STAND-BY",
+    "inittran": "TR_INIT",
+    "entry": true,
+    "exit": false,
+    "tran": true,
+    "rules": [
+      {
+        "n": "STAND-BY to DETECTION",
+        "c": "CHANGE",
+        "s": "STAND-BY",
+        "d": "DETECTION",
+        "t": "true"
+      },
+      {
+        "n": "DETECTION to IDENTIFICATION",
+        "c": "CHANGE",
+        "s": "DETECTION",
+        "d": "IDENTIFICATION",
+        "t": "true"
+      },
+      {
+        "n": "IDENTIFICATION to INPUT",
+        "c": "CHANGE",
+        "s": "IDENTIFICATION",
+        "d": "INPUT",
+        "t": "true"
+      },
+      {
+        "n": "INPUT to PAYMENT",
+        "c": "CHANGE",
+        "s": "INPUT",
+        "d": "PAYMENT",
+        "t": "true"
+      },
+      {
+        "n": "PAYMENT to REFUELING",
+        "c": "CHANGE",
+        "s": "PAYMENT",
+        "d": "REFUELING",
+        "t": "true"
+      },
+      {
+        "n": "REFUELING to INVOICE",
+        "c": "CHANGE",
+        "s": "REFUELING",
+        "d": "INVOICE",
+        "t": "true"
+      },
+      {
+        "n": "INVOICE to STAND-BY",
+        "c": "CHANGE",
+        "s": "INVOICE",
+        "d": "STAND-BY",
+        "t": "true"
+      }
+    ],
+    "x": 510,
+    "y": 220,
+    "wires": [
+      [
+        "c2851cf4.99568"
+      ]
+    ]
+  },
+  {
+    "id": "247f452e.8a9b0a",
+    "type": "change",
+    "z": "4be471e0.6c17d",
+    "name": "CHANGE",
+    "rules": [
+      {
+        "t": "set",
+        "p": "topic",
+        "pt": "msg",
+        "to": "CHANGE",
+        "tot": "str"
+      },
+      {
+        "t": "set",
+        "p": "payload",
+        "pt": "msg",
+        "to": "true",
+        "tot": "bool"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 1160,
+    "y": 500,
+    "wires": [
+      [
+        "8ae48a1b.0b9008"
+      ]
+    ]
+  },
+  {
+    "id": "46656af.7f12b94",
+    "type": "comment",
+    "z": "4be471e0.6c17d",
+    "name": "Sample APP pattern for Autonomous Refueling Station",
+    "info": "Note that under UK law, the amber light must\nbe showing for 3 seconds.\n\nSequence is:\n\n- RED\n- RED+AMBER\n- GREEN\n- AMBER\n- RED\n\nIn this finite state machine, we only need\none transition, called `CHANGE` since we only\nneed to rotate through each state in turn.\n\nIn this flow example, we use the transition\noutput to control the sequence and take the\nentry output as the actual light(s) showing.",
+    "x": 370,
+    "y": 80,
+    "wires": []
+  },
+  {
+    "id": "9cb35c89.b8d9",
+    "type": "inject",
+    "z": "4be471e0.6c17d",
+    "name": "",
+    "topic": "CHANGE",
+    "payload": "true",
+    "payloadType": "bool",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "onceDelay": "",
+    "x": 290,
+    "y": 220,
+    "wires": [
+      [
+        "8ae48a1b.0b9008"
+      ]
+    ]
+  },
+  {
+    "id": "dfff6d9.df9ed9",
+    "type": "debug",
+    "z": "4be471e0.6c17d",
+    "name": "transition",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "payload",
+    "x": 920,
+    "y": 660,
+    "wires": []
+  },
+  {
+    "id": "9f85e9a2.279328",
+    "type": "debug",
+    "z": "4be471e0.6c17d",
+    "name": "exit",
+    "active": false,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "payload",
+    "x": 1030,
+    "y": 180,
+    "wires": []
+  },
+  {
+    "id": "2828856a.745b6a",
+    "type": "debug",
+    "z": "4be471e0.6c17d",
+    "name": "entry",
+    "active": false,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "payload",
+    "x": 1030,
+    "y": 120,
+    "wires": []
+  },
+  {
+    "id": "c2851cf4.99568",
+    "type": "switch",
+    "z": "4be471e0.6c17d",
+    "name": "entry\\exit\\transition",
+    "property": "payload",
+    "propertyType": "msg",
+    "rules": [
+      {
+        "t": "cont",
+        "v": "_entry",
+        "vt": "str"
+      },
+      {
+        "t": "cont",
+        "v": "_exit",
+        "vt": "str"
+      },
+      {
+        "t": "else"
+      }
+    ],
+    "checkall": "true",
+    "repair": false,
+    "outputs": 3,
+    "x": 730,
+    "y": 220,
+    "wires": [
+      [
+        "2828856a.745b6a"
+      ],
+      [
+        "9f85e9a2.279328"
+      ],
+      [
+        "a0a2a75b.910e38",
+        "70960301.db4e9c",
+        "8730bed9.b7d92",
+        "bdcd9451.dcda28",
+        "a1aa649c.4fbd18",
+        "91b4b075.60cea",
+        "4f38550e.e62e3c"
+      ]
+    ]
+  },
+  {
+    "id": "ad57b8cb.a611f8",
+    "type": "comment",
+    "z": "4be471e0.6c17d",
+    "name": "Otherwise is  '_transition' (does not append anything)",
+    "info": "Does not append anything",
+    "x": 1090,
+    "y": 280,
+    "wires": []
+  },
+  {
+    "id": "a0a2a75b.910e38",
+    "type": "debug",
+    "z": "4be471e0.6c17d",
+    "name": "transition",
+    "active": false,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "payload",
+    "x": 1040,
+    "y": 240,
+    "wires": []
+  },
+  {
+    "id": "70960301.db4e9c",
+    "type": "subflow:ead9f677.3be798",
+    "z": "4be471e0.6c17d",
+    "name": "",
+    "x": 510,
+    "y": 380,
+    "wires": [
+      [
+        "247f452e.8a9b0a",
+        "dfff6d9.df9ed9"
+      ]
+    ]
+  },
+  {
+    "id": "a1aa649c.4fbd18",
+    "type": "subflow:ced46e98.162e6",
+    "z": "4be471e0.6c17d",
+    "name": "",
+    "x": 510,
+    "y": 560,
+    "wires": [
+      [
+        "247f452e.8a9b0a",
+        "dfff6d9.df9ed9"
+      ]
+    ]
+  },
+  {
+    "id": "8730bed9.b7d92",
+    "type": "subflow:858ac742.27d7a8",
+    "z": "4be471e0.6c17d",
+    "name": "",
+    "x": 490,
+    "y": 440,
+    "wires": [
+      [
+        "247f452e.8a9b0a",
+        "dfff6d9.df9ed9"
+      ]
+    ]
+  },
+  {
+    "id": "bdcd9451.dcda28",
+    "type": "subflow:10f37865.6aef58",
+    "z": "4be471e0.6c17d",
+    "name": "",
+    "x": 520,
+    "y": 500,
+    "wires": [
+      [
+        "247f452e.8a9b0a",
+        "dfff6d9.df9ed9"
+      ]
+    ]
+  },
+  {
+    "id": "91b4b075.60cea",
+    "type": "subflow:43c3905a.7e359",
+    "z": "4be471e0.6c17d",
+    "name": "",
+    "x": 510,
+    "y": 620,
+    "wires": [
+      [
+        "247f452e.8a9b0a",
+        "dfff6d9.df9ed9"
+      ]
+    ]
+  },
+  {
+    "id": "4f38550e.e62e3c",
+    "type": "subflow:30faf3c6.2434ec",
+    "z": "4be471e0.6c17d",
+    "name": "",
+    "x": 520,
+    "y": 680,
+    "wires": [
+      [
+        "247f452e.8a9b0a",
+        "dfff6d9.df9ed9"
+      ]
+    ]
+  }
+]
