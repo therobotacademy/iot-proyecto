@@ -1,0 +1,197 @@
+[
+  {
+    "id": "3e4c8488.2aabdc",
+    "type": "start virtual device",
+    "z": "6ae93199.adc43",
+    "name": "Ultrasound sensor",
+    "deviceId": "01",
+    "schema": "c1f7bbe8.a24df8",
+    "outputs": 1,
+    "x": 310,
+    "y": 80,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "c0e5ebf6.661128",
+    "type": "debug",
+    "z": "6ae93199.adc43",
+    "name": "tiempo (s)",
+    "active": true,
+    "console": "false",
+    "complete": "delta_t",
+    "x": 620,
+    "y": 280,
+    "wires": []
+  },
+  {
+    "id": "bf2f584a.07f608",
+    "type": "set properties",
+    "z": "6ae93199.adc43",
+    "deviceId": "01",
+    "schema": "c1f7bbe8.a24df8",
+    "name": "new point",
+    "propAll": false,
+    "prop": "c9ae014bc1aa",
+    "valueType": "msg",
+    "value": "distance_random",
+    "x": 460,
+    "y": 220,
+    "wires": [
+      [
+        "71fac9e6.0bee48",
+        "c0e5ebf6.661128"
+      ]
+    ]
+  },
+  {
+    "id": "8096f7ba.de2608",
+    "type": "ui_chart",
+    "z": "6ae93199.adc43",
+    "name": "",
+    "group": "2831e2c6.6881ee",
+    "order": 0,
+    "width": 0,
+    "height": 0,
+    "label": "distance_random",
+    "chartType": "line",
+    "legend": "false",
+    "xformat": "HH:mm:ss",
+    "interpolate": "linear",
+    "nodata": "",
+    "dot": false,
+    "ymin": "",
+    "ymax": "",
+    "removeOlder": 1,
+    "removeOlderPoints": "60",
+    "removeOlderUnit": "60",
+    "cutout": 0,
+    "useOneColor": false,
+    "colors": [
+      "#1f77b4",
+      "#aec7e8",
+      "#ff7f0e",
+      "#2ca02c",
+      "#98df8a",
+      "#d62728",
+      "#ff9896",
+      "#9467bd",
+      "#c5b0d5"
+    ],
+    "x": 870,
+    "y": 220,
+    "wires": [
+      [],
+      []
+    ]
+  },
+  {
+    "id": "8b11ab8e.c59db8",
+    "type": "function",
+    "z": "6ae93199.adc43",
+    "name": "(count & to) & (distance_random & ts)",
+    "func": "// initialise the counter to 0 if it doesn't exist already\nvar count = context.get('count')||0;\nvar to    = context.get('to')||0;\ncount += 1;\n// store the value back\ncontext.set('count',count);\n// make it part of the outgoing msg object\nmsg.count = count;\n\n// Set the start time (in the first count)\nif (count == 1) {\n    to = new Date().getTime()/1000;\n    context.set('to',to);\n}\nmsg.to = to;\nmsg.ts = msg.payload/1000;\n\nmsg.delta_t  = msg.ts - msg.to;\nmsg.distance_random = Math.floor(Math.random() * (450 - 2) + 2);\n\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 210,
+    "y": 220,
+    "wires": [
+      [
+        "bf2f584a.07f608"
+      ]
+    ]
+  },
+  {
+    "id": "71fac9e6.0bee48",
+    "type": "function",
+    "z": "6ae93199.adc43",
+    "name": "Prepare for Visualization",
+    "func": "msg.payload = msg.payload.properties.distance_random;\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 650,
+    "y": 220,
+    "wires": [
+      [
+        "8096f7ba.de2608"
+      ]
+    ]
+  },
+  {
+    "id": "68eb3a6f.109f94",
+    "type": "inject",
+    "z": "6ae93199.adc43",
+    "name": "",
+    "topic": "Start",
+    "payload": "go",
+    "payloadType": "str",
+    "repeat": "",
+    "crontab": "",
+    "once": true,
+    "x": 100,
+    "y": 80,
+    "wires": [
+      [
+        "3e4c8488.2aabdc"
+      ]
+    ]
+  },
+  {
+    "id": "222a6b23.c78064",
+    "type": "inject",
+    "z": "6ae93199.adc43",
+    "name": "",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "1",
+    "crontab": "",
+    "once": false,
+    "x": 110,
+    "y": 140,
+    "wires": [
+      [
+        "8b11ab8e.c59db8"
+      ]
+    ]
+  },
+  {
+    "id": "c1f7bbe8.a24df8",
+    "type": "Device Schema",
+    "z": "",
+    "deviceType": "HC-SR04",
+    "props": [
+      {
+        "guid": "c9ae014bc1aa",
+        "name": "distance_random",
+        "random": {
+          "func": "integer",
+          "args": {
+            "min": 2,
+            "max": 450
+          }
+        }
+      }
+    ],
+    "evts": []
+  },
+  {
+    "id": "2831e2c6.6881ee",
+    "type": "ui_group",
+    "z": "",
+    "name": "Registro",
+    "tab": "8beb9654.11f528",
+    "order": 1,
+    "disp": true,
+    "width": "6"
+  },
+  {
+    "id": "8beb9654.11f528",
+    "type": "ui_tab",
+    "z": "",
+    "name": "DATOS SENSOR",
+    "icon": "dashboard",
+    "order": 2
+  }
+]
